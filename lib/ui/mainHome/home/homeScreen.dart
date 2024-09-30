@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:news_app/components/Apploader.dart';
 import 'package:news_app/components/CustomError.dart';
-import 'package:news_app/network/chopper/ApiService.dart';
+import 'package:news_app/ui/Providers.dart';
 import 'package:news_app/ui/mainHome/home/components/BuildHorizontalList.dart';
 
 class Homescreen extends ConsumerWidget {

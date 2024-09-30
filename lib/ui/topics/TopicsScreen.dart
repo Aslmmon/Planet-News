@@ -7,6 +7,7 @@ import 'package:news_app/components/TopicsItem.dart';
 import 'package:news_app/data/models/topics/Topics.dart';
 import 'package:news_app/data/models/user/user.dart';
 import 'package:news_app/network/chopper/ApiService.dart';
+import 'package:news_app/ui/Providers.dart';
 
 class Topicsscreen extends ConsumerWidget {
   static const TopicsScreenTag = '/topics';

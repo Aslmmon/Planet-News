@@ -14,8 +14,6 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'ApiService.chopper.dart';
 
-part 'ApiService.g.dart';
-
 const apiKey = "pub_548991479c93c011bcbb3e55107110a45166d";
 
 @ChopperApi(baseUrl: "https://newsdata.io")
@@ -63,29 +61,10 @@ abstract class ApiService extends ChopperService implements ServiceInterface {
   }
 }
 
-// providers for UI :
-@riverpod
-Future<List<Country>> countries(CountriesRef ref) =>
-    ref.read(serviceProvider).getCountries();
-
-final IndexProvider = StateProvider.autoDispose((ref) {
-  return -1;
-});
-
-@riverpod
-Future<List<Topics>> topics(TopicsRef ref) =>
-    ref.read(serviceProvider).getTopics();
-
-@riverpod
-Future<Sources> sources(SourcesRef ref, User user) =>
-    ref.read(apiDataProvider(user));
-
 final apiDataProvider =
     Provider.autoDispose.family<Future<Sources>, User>((ref, data) async {
   final apiService = ref.read(serviceProvider);
   final response = await apiService.fetchData(apiKey, data.country, data.topic);
-  print(response.isSuccessful.toString());
-
   if (response.isSuccessful) {
     final sourcesModel = Sources.fromJson(response.body);
     print(response.body);
@@ -99,11 +78,7 @@ final apiDataProvider =
 
     return SourceResponse;
   } else {
-
-
-    // Handle error
     print(response.error.toString());
-
     throw Exception("Failed to fetch data ");
   }
 });

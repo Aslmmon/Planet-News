@@ -27,10 +27,13 @@ class _SplashscreenState extends State<Splashscreen> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-
           children: [
             Lottie.asset('assets/splash_logo.json', width: 200, height: 150),
-             Text('Your Daily Dose of News',style: Theme.of(context).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold))
+            Text('Your Daily Dose of News',
+                style: Theme.of(context)
+                    .textTheme
+                    .titleSmall
+                    ?.copyWith(fontWeight: FontWeight.bold))
           ],
         ),
       ),

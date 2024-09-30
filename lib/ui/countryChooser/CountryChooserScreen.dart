@@ -8,6 +8,8 @@ import 'package:news_app/data/models/user/user.dart';
 import 'package:news_app/network/chopper/ApiService.dart';
 import 'package:news_app/providers.dart';
 
+import '../Providers.dart';
+
 class Countrychooserscreen extends ConsumerWidget {
   static String CountryChooserScreenTag = '/CountryChooser';
   final VoidCallback nextScreen;

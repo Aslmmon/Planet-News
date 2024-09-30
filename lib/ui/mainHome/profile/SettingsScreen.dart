@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:news_app/components/AppButton.dart';
+import 'package:news_app/components/SettingsItem.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -34,49 +35,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
               },
             ),
           ),
-          SettingItem(
-            startIcon: const Icon(Icons.language),
+          const SettingItem(
+            startIcon: Icon(Icons.language),
             title: 'Language',
-            endWidget: const Icon(Icons.chevron_right),
+            endWidget: Icon(Icons.chevron_right),
           )
         ],
       ),
-    );
-  }
-}
-
-class SettingItem extends StatelessWidget {
-  SettingItem(
-      {super.key,
-      required this.startIcon,
-      required this.title,
-      required this.endWidget});
-
-  Icon startIcon;
-  String title;
-  Widget endWidget;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            startIcon,
-            const SizedBox(width: 10),
-            Text(
-              title,
-              style: Theme.of(context).textTheme.titleSmall,
-            ),
-            Expanded(
-              child: Container(
-                alignment: Alignment.topRight,
-                child: endWidget,
-              ),
-            ),
-          ]),
     );
   }
 }
