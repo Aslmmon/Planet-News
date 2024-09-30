@@ -1,0 +1,70 @@
+[
+  {
+    "name": "business",
+    "id": "1"
+  },
+  {
+    "name": "crime",
+    "id": "2"
+  },
+  {
+    "name": "domestic",
+    "id": "3"
+  },
+  {
+    "name": "education",
+    "id": "4"
+  },
+  {
+    "name": "entertainment",
+    "id": "5"
+  },
+  {
+    "name": "environment",
+    "id": "6"
+  },
+  {
+    "name": "food",
+    "id": "7"
+  },
+  {
+    "name": "health",
+    "id": "8"
+  },
+  {
+    "name": "lifestyle",
+    "id": "9"
+  },
+  {
+    "name": "other",
+    "id": "10"
+  },
+  {
+    "name": "politics",
+    "id": "11"
+  },
+  {
+    "name": "science",
+    "id": "12"
+  },
+  {
+    "name": "sports",
+    "id": "13"
+  },
+  {
+    "name": "technology",
+    "id": "14"
+  },
+  {
+    "name": "top",
+    "id": "15"
+  },
+  {
+    "name": "tourism",
+    "id": "16"
+  },
+  {
+    "name": "world",
+    "id": "17"
+  }
+]
