@@ -8,4 +8,6 @@ abstract class ServiceInterface {
   Future<List<Topics>> getTopics();
 
   Future<Response> fetchData(String api, String country, String category);
+
+  Future<Response> fetchLatestArticles(String api, String country, String category);
 }

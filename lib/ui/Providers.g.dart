@@ -181,5 +181,132 @@ class _SourcesProviderElement extends AutoDisposeFutureProviderElement<Sources>
   @override
   User get user => (origin as SourcesProvider).user;
 }
+
+String _$articlesHash() => r'aabb9dabf64f89855e98e4d555bd9eec1e564c64';
+
+/// See also [articles].
+@ProviderFor(articles)
+const articlesProvider = ArticlesFamily();
+
+/// See also [articles].
+class ArticlesFamily extends Family<AsyncValue<Articles>> {
+  /// See also [articles].
+  const ArticlesFamily();
+
+  /// See also [articles].
+  ArticlesProvider call(
+    User user,
+  ) {
+    return ArticlesProvider(
+      user,
+    );
+  }
+
+  @override
+  ArticlesProvider getProviderOverride(
+    covariant ArticlesProvider provider,
+  ) {
+    return call(
+      provider.user,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'articlesProvider';
+}
+
+/// See also [articles].
+class ArticlesProvider extends AutoDisposeFutureProvider<Articles> {
+  /// See also [articles].
+  ArticlesProvider(
+    User user,
+  ) : this._internal(
+          (ref) => articles(
+            ref as ArticlesRef,
+            user,
+          ),
+          from: articlesProvider,
+          name: r'articlesProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$articlesHash,
+          dependencies: ArticlesFamily._dependencies,
+          allTransitiveDependencies: ArticlesFamily._allTransitiveDependencies,
+          user: user,
+        );
+
+  ArticlesProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.user,
+  }) : super.internal();
+
+  final User user;
+
+  @override
+  Override overrideWith(
+    FutureOr<Articles> Function(ArticlesRef provider) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: ArticlesProvider._internal(
+        (ref) => create(ref as ArticlesRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        user: user,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeFutureProviderElement<Articles> createElement() {
+    return _ArticlesProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is ArticlesProvider && other.user == user;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, user.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+mixin ArticlesRef on AutoDisposeFutureProviderRef<Articles> {
+  /// The parameter `user` of this provider.
+  User get user;
+}
+
+class _ArticlesProviderElement
+    extends AutoDisposeFutureProviderElement<Articles> with ArticlesRef {
+  _ArticlesProviderElement(super.provider);
+
+  @override
+  User get user => (origin as ArticlesProvider).user;
+}
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

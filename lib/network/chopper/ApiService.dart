@@ -1,16 +1,10 @@
 import 'dart:convert';
 
 import 'package:chopper/chopper.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:news_app/data/models/country/Country.dart';
-import 'package:news_app/data/models/sources/Sources.dart';
 import 'package:news_app/data/models/topics/Topics.dart';
-import 'package:news_app/data/models/user/user.dart';
 import 'package:news_app/network/service_interface.dart';
-import 'package:news_app/providers.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'ApiService.chopper.dart';
 
@@ -48,6 +42,11 @@ abstract class ApiService extends ChopperService implements ServiceInterface {
   }
 
   @override
+  @Get(path: "/api/1/latest")
+  Future<Response> fetchLatestArticles(@Query("apiKey") String api,
+      @Query("country") String country, @Query('category') String category);
+
+  @override
   Future<List<Topics>> getTopics() async {
     var topics = <Topics>[];
     final jsonString = await rootBundle.loadString('assets/topics.json');
@@ -59,45 +58,4 @@ abstract class ApiService extends ChopperService implements ServiceInterface {
 
     return topics;
   }
-}
-
-final apiDataProvider =
-    Provider.autoDispose.family<Future<Sources>, User>((ref, data) async {
-  final apiService = ref.read(serviceProvider);
-  final response = await apiService.fetchData(apiKey, data.country, data.topic);
-  if (response.isSuccessful) {
-    final sourcesModel = Sources.fromJson(response.body);
-    print(response.body);
-
-    final sourcesList = getSourceItems(sourcesModel);
-    final SourceResponse = Sources(
-        status: sourcesModel.status,
-        results: sourcesList,
-        totalResults: sourcesModel.totalResults);
-    debugPrint(SourceResponse.toString());
-
-    return SourceResponse;
-  } else {
-    print(response.error.toString());
-    throw Exception("Failed to fetch data ");
-  }
-});
-
-/// Methods to convert network recipes into local recipes
-List<SourceItem> getSourceItems(Sources result) {
-  final sources = <SourceItem>[];
-  for (final result in result.results) {
-    sources.add(getSItem(result));
-  }
-  return sources;
-}
-
-SourceItem getSItem(SourceItem result) {
-  return SourceItem(
-      id: result.id,
-      name: result.name,
-      url: result.url,
-      icon: result.icon,
-      last_fetch: result.last_fetch,
-      description: result.description);
 }

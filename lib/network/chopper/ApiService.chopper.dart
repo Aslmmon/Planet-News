@@ -36,4 +36,25 @@ class _$ApiService extends ApiService {
     );
     return client.send<dynamic, dynamic>($request);
   }
+
+  @override
+  Future<Response<dynamic>> fetchLatestArticles(
+    String api,
+    String country,
+    String category,
+  ) {
+    final Uri $url = Uri.parse('https://newsdata.io/api/1/latest');
+    final Map<String, dynamic> $params = <String, dynamic>{
+      'apiKey': api,
+      'country': country,
+      'category': category,
+    };
+    final Request $request = Request(
+      'GET',
+      $url,
+      client.baseUrl,
+      parameters: $params,
+    );
+    return client.send<dynamic, dynamic>($request);
+  }
 }
