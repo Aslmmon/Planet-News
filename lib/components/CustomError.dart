@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 class CustomError extends StatelessWidget {
   final String errorDetails;
@@ -18,7 +19,8 @@ class CustomError extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset('assets/error_animation.json'),
+            Lottie.asset('assets/error_animation.json',
+                width: 200, height: 200),
             Text(
               kDebugMode
                   ? errorDetails.toString()
@@ -31,9 +33,7 @@ class CustomError extends StatelessWidget {
             ),
             const SizedBox(height: 12),
             const Text(
-              kDebugMode
-                  ? 'https://docs.flutter.dev/testing/errors'
-                  : "We encountered an error and we've notified our engineering team about it. Sorry for the inconvenience caused.",
+              "We encountered an error and we've notified our engineering team about it. Sorry for the inconvenience caused.",
               textAlign: TextAlign.center,
               style: TextStyle(color: Colors.black, fontSize: 14),
             ),

@@ -45,7 +45,7 @@ class Topicsscreen extends ConsumerWidget {
 
   void _updateTopic(User user, List<Topics> data, WidgetRef ref) {
     User updatedUser = user.copyWith(
-        topic: data[ref.read(IndexProvider.notifier).state].name ?? '');
+        topic: data[ref.read(IndexProvider.notifier).state]);
     ref.read(userProvider.notifier).updateUser(updatedUser);
   }
 }

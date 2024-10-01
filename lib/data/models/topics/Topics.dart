@@ -4,8 +4,8 @@ part 'Topics.g.dart';
 
 @JsonSerializable()
 class Topics  extends Equatable{
-  String? name;
-  String? id;
+  String? name = 'sports';
+  String? id='1';
 
   Topics({this.name, this.id});
 

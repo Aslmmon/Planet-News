@@ -49,8 +49,8 @@ class Countrychooserscreen extends ConsumerWidget {
   }
 
   void _updateCountry(User user, List<Country> data, WidgetRef ref) {
-    final updatedUser = user.copyWith(
-        country: data[ref.read(IndexProvider.notifier).state].code);
+    final updatedUser =
+        user.copyWith(country: data[ref.read(IndexProvider.notifier).state]);
     ref.read(userProvider.notifier).updateUser(updatedUser);
   }
 }

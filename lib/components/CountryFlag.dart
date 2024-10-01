@@ -33,11 +33,11 @@ class CountryItem extends ConsumerWidget {
         child: Row(
           children: [
             Text(
-              country.emoji,
+              country.emoji ?? '',
               style: const TextStyle(fontSize: 25),
             ),
             const SizedBox(width: 10),
-            Text(country.name,
+            Text(country.name ?? '',
                 style: Theme.of(context).textTheme.titleSmall?.copyWith(
                     color: isSelected ? Colors.white : Colors.black)),
             isSelected

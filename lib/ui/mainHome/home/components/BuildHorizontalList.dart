@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:news_app/components/ArticleItemWidget.dart';
 import 'package:news_app/components/LatestTopicItem.dart';
@@ -8,34 +9,48 @@ import 'package:news_app/data/models/topics/Topics.dart';
 import 'package:news_app/data/models/user/user.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
-class BuildHorizontalList extends ConsumerWidget {
-
-  const BuildHorizontalList(
-    this.data, {
-    super.key,
-  });
+class BuildHorizontalList extends ConsumerStatefulWidget {
+  BuildHorizontalList(
+      this.data, this.user, this.IndexToJumpTo, this.onTopicClicked);
 
   final List<Topics> data;
+  final User user;
+  final int IndexToJumpTo;
+  final ItemScrollController itemScrollController = ItemScrollController();
+  final ValueChanged<Topics> onTopicClicked;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final ItemScrollController itemScrollController = ItemScrollController();
-    final user = ref.read(userProvider);
+  ConsumerState<ConsumerStatefulWidget> createState() => _BuildHorizontalList();
+}
 
+class _BuildHorizontalList extends ConsumerState<BuildHorizontalList> {
+  @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      widget.itemScrollController.scrollTo(
+        index: widget.IndexToJumpTo,
+        duration: const Duration(seconds: 1),
+        curve: Curves.easeOut,
+      );
+    });
+    super.initState();
+  }
 
-
-    print(user.topic);
+  @override
+  Widget build(BuildContext context) {
     return ScrollablePositionedList.builder(
         scrollDirection: Axis.horizontal,
-        shrinkWrap: true,
-        itemScrollController: itemScrollController,
-        itemCount: data.length,
+        shrinkWrap: false,
+        itemScrollController: widget.itemScrollController,
+        itemCount: widget.data.length,
         itemBuilder: (context, index) {
           return Padding(
             padding: const EdgeInsets.only(right: 15),
             child: LatestTopicItem(
-              data: data[index],
-              isSelected: data[index].name?.compareTo(user.topic) == 0,
+              data: widget.data[index],
+              isSelected:
+                  widget.data[index].name?.compareTo(widget.user.topic.name?? '') == 0,
+              onTopicClicked: widget.onTopicClicked,
             ),
           );
         });
