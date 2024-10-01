@@ -1,8 +1,9 @@
+import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'Topics.g.dart';
 
 @JsonSerializable()
-class Topics {
+class Topics  extends Equatable{
   String? name;
   String? id;
 
@@ -13,5 +14,8 @@ class Topics {
       _$TopicsFromJson(json);
 
   Map<String, dynamic> toJson() => _$TopicsToJson(this);
+
+  @override
+  List<Object?> get props => [name,id];
 
 }
