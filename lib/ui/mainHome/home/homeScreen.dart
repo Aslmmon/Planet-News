@@ -15,7 +15,7 @@ class Homescreen extends ConsumerWidget {
     final topicsPrv = ref.watch(topicsProvider);
     final user = ref.watch(userProvider);
     final articles = ref.watch(articlesProvider(user));
-    debugPrint(user.country.name.toString());
+    print(user.country.toString());
 
     return topicsPrv.when(
         data: (data) => Column(

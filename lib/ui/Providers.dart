@@ -38,7 +38,8 @@ Future<Articles> articles(ArticlesRef ref, User user) =>
 final apiDataProvider =
     Provider.autoDispose.family<Future<Sources>, User>((ref, data) async {
   final apiService = ref.read(serviceProvider);
-  final response = await apiService.fetchData(apiKey, data.country.name ??'', data.topic.name ?? '');
+  final response = await apiService.fetchData(
+      apiKey, data.country.code?.toLowerCase() ?? '', data.topic.name ?? '');
   if (response.isSuccessful) {
     final sourcesModel = Sources.fromJson(response.body);
     print(response.body);
@@ -79,8 +80,9 @@ SourceItem getSItem(SourceItem result) {
 final apiDataProviderForArticles =
     Provider.autoDispose.family<Future<Articles>, User>((ref, data) async {
   final apiService = ref.read(serviceProvider);
-  final response =
-      await apiService.fetchLatestArticles(apiKey, data.country.code ?? '', data.topic.name ?? '');
+
+  final response = await apiService.fetchLatestArticles(
+      apiKey, data.country.code?.toLowerCase() ?? '', data.topic.name ?? '');
   if (response.isSuccessful) {
     final articlesModel = Articles.fromJson(response.body);
     print(response.body);

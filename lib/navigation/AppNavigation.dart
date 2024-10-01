@@ -11,7 +11,7 @@ import 'package:news_app/ui/topics/TopicsScreen.dart';
 class AppNavigation {
   /// The route configuration.
   static final GoRouter appRouter = GoRouter(
-    initialLocation: Mainhome.MainHomeTag,
+    initialLocation: Splashscreen.SplashScreenTag,
     routes: <RouteBase>[
       GoRoute(
         path: Splashscreen.SplashScreenTag,

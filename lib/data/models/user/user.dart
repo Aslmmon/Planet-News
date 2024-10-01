@@ -39,6 +39,7 @@ class UserNotifier extends StateNotifier<User> {
   void updateUser(User updatedUser) {
     state = updatedUser;
     debugPrint('----- user now is $state----- ');
+
   }
 }
 
