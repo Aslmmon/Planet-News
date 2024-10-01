@@ -23,7 +23,7 @@ class User extends Equatable {
 }
 
 class UserNotifier extends StateNotifier<User> {
-  UserNotifier() : super(const User('', ''));
+  UserNotifier() : super(const User('eg', 'sports'));
 
   void updateUser(User updatedUser) {
     state = updatedUser;

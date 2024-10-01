@@ -25,8 +25,10 @@ class ArticleItem {
   String? title;
   String? link;
   String? description;
+
   String? pubDate;
   String? pubDateTZ;
+  String? image_url;
   String? source_name;
   String? source_url;
   String? source_icon;
@@ -39,11 +41,11 @@ class ArticleItem {
       this.description,
       this.pubDate,
       this.pubDateTZ,
+      this.image_url,
       this.source_name,
       this.source_url,
       this.source_icon,
       this.language});
-
 
   factory ArticleItem.fromJson(Map<String, dynamic> json) =>
       _$ArticleItemFromJson(json);

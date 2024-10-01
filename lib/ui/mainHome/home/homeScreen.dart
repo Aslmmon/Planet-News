@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:news_app/components/Apploader.dart';
 import 'package:news_app/components/CustomError.dart';
+import 'package:news_app/data/models/user/user.dart';
 import 'package:news_app/ui/Providers.dart';
 import 'package:news_app/ui/mainHome/home/components/BuildHorizontalList.dart';
 
@@ -11,6 +12,9 @@ class Homescreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final topicsPrv = ref.watch(topicsProvider);
+    final user = ref.watch(userProvider);
+    final articles = ref.watch(articlesProvider(user));
+
     return SafeArea(
       child: topicsPrv.when(
           data: (data) => Padding(
@@ -25,9 +29,12 @@ class Homescreen extends ConsumerWidget {
                             .textTheme
                             .titleMedium
                             ?.copyWith(fontWeight: FontWeight.bold)),
+                    SizedBox(height: 40, child: BuildHorizontalList(data)),
                     Expanded(
-                      child: BuildHorizontalList(data),
-                    ),
+                        child: articles.when(
+                            data: (data) => BuildVerticalList(data.results),
+                            error: (err, _) => Text(err.toString()),
+                            loading: () => const SizedBox()))
                   ],
                 ),
               ),
@@ -35,6 +42,4 @@ class Homescreen extends ConsumerWidget {
           loading: () => const Apploader()),
     );
   }
-
-
 }

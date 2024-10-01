@@ -5,7 +5,6 @@ import 'package:flutter/services.dart';
 import 'package:news_app/data/models/country/Country.dart';
 import 'package:news_app/data/models/topics/Topics.dart';
 import 'package:news_app/network/service_interface.dart';
-
 part 'ApiService.chopper.dart';
 
 const apiKey = "pub_548991479c93c011bcbb3e55107110a45166d";

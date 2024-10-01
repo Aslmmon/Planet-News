@@ -19,7 +19,7 @@ class _MainhomeState extends State<Mainhome> {
   int _currentIndex = 0;
   final List<Widget> _screens = [
     const Homescreen(),
-    Explorescreen(),
+    const Explorescreen(),
     const Bookmarkscreen(),
     const SettingsScreen(),
   ];

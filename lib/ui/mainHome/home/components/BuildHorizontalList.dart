@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:news_app/components/ArticleItemWidget.dart';
+import 'package:news_app/components/LatestTopicItem.dart';
+import 'package:news_app/data/models/articles/Articles.dart';
 import 'package:news_app/data/models/topics/Topics.dart';
 
 class BuildHorizontalList extends StatelessWidget {
@@ -19,29 +22,31 @@ class BuildHorizontalList extends StatelessWidget {
         itemBuilder: (context, index) {
           return Padding(
             padding: const EdgeInsets.only(right: 15),
-            child: Text(
-              data[index].name ?? '',
-              style: const TextStyle(color: Colors.black),
-            ),
+            child: LatestTopicItem(data: data[index]),
           );
         });
   }
 }
 
-// Widget _buildVerticalArticleList() {
-//   return Expanded(
-//     child: ListView.builder(
-//         scrollDirection: Axis.vertical,
-//         shrinkWrap: true,
-//         itemCount: dummyList.length,
-//         itemBuilder: (context, index) {
-//           return Padding(
-//             padding: const EdgeInsets.symmetric(vertical: 10),
-//             child: Text(
-//               dummyList[index],
-//               style: const TextStyle(color: Colors.black),
-//             ),
-//           );
-//         }),
-//   );
-// }
+class BuildVerticalList extends StatelessWidget {
+  const BuildVerticalList(
+    this.data, {
+    super.key,
+  });
+
+  final List<ArticleItem> data;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+        scrollDirection: Axis.vertical,
+        shrinkWrap: true,
+        itemCount: data.length,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: const EdgeInsets.all(10),
+            child: ArticleItemWidget(data: data[index]),
+          );
+        });
+  }
+}

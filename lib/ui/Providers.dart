@@ -53,7 +53,7 @@ final apiDataProvider =
     return SourceResponse;
   } else {
     print(response.error.toString());
-    throw Exception("Failed to fetch data ");
+    throw Exception("Failed to fetch data due to ${response.error}");
   }
 });
 
@@ -114,6 +114,7 @@ ArticleItem getArticleItem(ArticleItem result) {
     title: result.title,
     link: result.link,
     description: result.description,
+    image_url: result.image_url,
     pubDate: result.pubDate,
     pubDateTZ: result.pubDateTZ,
     source_name: result.source_name,
