@@ -3,12 +3,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:news_app/components/Apploader.dart';
 import 'package:news_app/components/CountryChooserWidget.dart';
 import 'package:news_app/components/CustomError.dart';
+import 'package:news_app/data/models/articles/Articles.dart';
 import 'package:news_app/data/models/user/user.dart';
 import 'package:news_app/ui/Providers.dart';
 import 'package:news_app/ui/mainHome/home/components/BuildHorizontalList.dart';
 
 class Homescreen extends ConsumerWidget {
-  const Homescreen({super.key});
+  const Homescreen(this.onArticleClicked, {super.key});
+
+  final ValueChanged<ArticleItem> onArticleClicked;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -43,7 +46,12 @@ class Homescreen extends ConsumerWidget {
                     })),
                 Expanded(
                     child: articles.when(
-                        data: (data) => BuildVerticalList(data.results),
+                        data: (data) => BuildVerticalList(
+                              data.results,
+                              onArticleClicked: (ArticleItem value) {
+                                onArticleClicked(value);
+                              },
+                            ),
                         error: (err, _) =>
                             CustomError(errorDetails: err.toString()),
                         loading: () => const Apploader()))

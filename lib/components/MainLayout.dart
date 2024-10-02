@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:news_app/components/AppButton.dart';
+import 'package:news_app/ui/Providers.dart';
 
-class Mainlayout extends StatelessWidget {
+class Mainlayout extends ConsumerWidget {
   const Mainlayout(
       {super.key,
       required this.AppBarTitle,
@@ -13,7 +15,7 @@ class Mainlayout extends StatelessWidget {
   final VoidCallback onNextClicked;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,WidgetRef ref) {
     return Scaffold(
         appBar: AppBar(
             title: Text(
@@ -27,6 +29,7 @@ class Mainlayout extends StatelessWidget {
             children: [
               Expanded(child: MiddleScene),
               AppButton(
+                isButtonDisabled: (ref.watch(IndexProvider) == -1),
                 titleButton: 'Next',
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 20),

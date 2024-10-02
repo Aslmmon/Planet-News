@@ -48,8 +48,9 @@ class _BuildHorizontalList extends ConsumerState<BuildHorizontalList> {
             padding: const EdgeInsets.only(right: 15),
             child: LatestTopicItem(
               data: widget.data[index],
-              isSelected:
-                  widget.data[index].name?.compareTo(widget.user.topic.name?? '') == 0,
+              isSelected: widget.data[index].name
+                      ?.compareTo(widget.user.topic.name ?? '') ==
+                  0,
               onTopicClicked: widget.onTopicClicked,
             ),
           );
@@ -60,10 +61,11 @@ class _BuildHorizontalList extends ConsumerState<BuildHorizontalList> {
 class BuildVerticalList extends StatelessWidget {
   const BuildVerticalList(
     this.data, {
-    super.key,
+    super.key, required this.onArticleClicked,
   });
 
   final List<ArticleItem> data;
+  final ValueChanged<ArticleItem> onArticleClicked;
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +76,12 @@ class BuildVerticalList extends StatelessWidget {
         itemBuilder: (context, index) {
           return Padding(
             padding: const EdgeInsets.all(10),
-            child: ArticleItemWidget(data: data[index]),
+            child: ArticleItemWidget(
+              data: data[index],
+              valueChanged: (ArticleItem value) {
+                onArticleClicked(value);
+              },
+            ),
           );
         });
   }

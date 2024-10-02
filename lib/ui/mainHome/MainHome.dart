@@ -2,17 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:news_app/components/AppButton.dart';
 import 'package:news_app/components/CountryChooserWidget.dart';
+import 'package:news_app/data/models/articles/Articles.dart';
 import 'package:news_app/data/models/user/user.dart';
 import 'package:news_app/ui/mainHome/bookmarks/BookmarkScreen.dart';
+import 'package:news_app/ui/mainHome/home/details/ArticleDetailsScreen.dart';
 
 import 'explore/ExploreScreen.dart';
-import 'home/homeScreen.dart';
+import 'home/master/homeScreen.dart';
 import 'profile/SettingsScreen.dart';
 
 class Mainhome extends ConsumerStatefulWidget {
-  const Mainhome({super.key});
+  Mainhome(this.valueChanged, {super.key});
 
   static const MainHomeTag = '/mainHome';
+  final ValueChanged<ArticleItem> valueChanged;
 
   @override
   _MainhomeState createState() => _MainhomeState();
@@ -20,11 +23,24 @@ class Mainhome extends ConsumerStatefulWidget {
 
 class _MainhomeState extends ConsumerState<Mainhome> {
   int _currentIndex = 0;
-  final List<Widget> _screens = [
-    const Homescreen(),
-    const Bookmarkscreen(),
-    const SettingsScreen(),
-  ];
+  final List<Widget> _screens = [];
+
+  @override
+  void initState() {
+    _screens.addAll([
+      Homescreen((article) {
+        showModalBottomSheet(
+            context: context,
+            isScrollControlled: true,
+            builder: (BuildContext contex) {
+              return ArticleDetailsScreen(articleItem: article);
+            });
+      }),
+      const Bookmarkscreen(),
+      const SettingsScreen(),
+    ]);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -51,4 +51,9 @@ class ArticleItem {
       _$ArticleItemFromJson(json);
 
   Map<String, dynamic> toJson() => _$ArticleItemToJson(this);
+
+  @override
+  String toString() {
+    return "article :\n ${article_id} \n ${title} \n   ${link}  \n ${description}";
+  }
 }

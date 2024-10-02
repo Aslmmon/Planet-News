@@ -2,8 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:news_app/data/models/articles/Articles.dart';
 import 'package:news_app/ui/countryChooser/CountryChooserScreen.dart';
 import 'package:news_app/ui/mainHome/MainHome.dart';
+import 'package:news_app/ui/mainHome/home/details/ArticleDetailsScreen.dart';
 import 'package:news_app/ui/newsSource/NewsSourcesScreen.dart';
 import 'package:news_app/ui/splash/SplashScreen.dart';
 import 'package:news_app/ui/topics/TopicsScreen.dart';
@@ -37,10 +39,13 @@ class AppNavigation {
           builder: (BuildContext context, GoRouterState state) {
             return Topicsscreen(
               onNextClicked: () {
-                context.push(Newssourcesscreen.SourcesScreenTag);
+                context.push(Mainhome.MainHomeTag);
               },
             );
           }),
+      /**
+       * Removed from now in App Navigation
+       */
       GoRoute(
           path: Newssourcesscreen.SourcesScreenTag,
           builder: (BuildContext context, GoRouterState state) {
@@ -53,8 +58,25 @@ class AppNavigation {
       GoRoute(
           path: Mainhome.MainHomeTag,
           builder: (BuildContext context, GoRouterState state) {
-            return const Mainhome();
-          })
+            return Mainhome((article) {
+              print(article.description.toString());
+              context.pushNamed(ArticleDetailsScreen.ArticleDetailsTag,
+                  extra: article);
+            });
+          }),
+
+      /**
+       * Not used in Navigation Stack , just there to put implementation of sending data from One Route to another . :)
+       */
+      GoRoute(
+          path: ArticleDetailsScreen.ArticleDetailsTag,
+          name: ArticleDetailsScreen.ArticleDetailsTag,
+          builder: (BuildContext context, GoRouterState state) {
+            ArticleItem articleItem =
+                state.extra as ArticleItem; // -> casting is important
+
+            return ArticleDetailsScreen(articleItem: articleItem);
+          }),
     ],
   );
 }

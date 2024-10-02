@@ -3,20 +3,24 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:news_app/network/chopper/ApiService.dart';
 import 'package:news_app/ui/Providers.dart';
 
-class AppButton extends ConsumerWidget {
+class AppButton extends StatelessWidget {
   AppButton(
       {super.key,
       required this.titleButton,
       this.padding = EdgeInsets.zero,
+      this.ButtonColor = AppBlueColor,
+      required this.isButtonDisabled,
       required this.onPressed});
 
-  String titleButton;
-  EdgeInsets padding;
-  VoidCallback onPressed;
+  final String titleButton;
+  final EdgeInsets padding;
+  final VoidCallback onPressed;
+  Color? ButtonColor;
+
+ final bool isButtonDisabled;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final isButtonDisabled = (ref.watch(IndexProvider) == -1);
+  Widget build(BuildContext context) {
     return Column(
       children: [
         const Divider(
@@ -30,7 +34,7 @@ class AppButton extends ConsumerWidget {
                 style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5)),
-                  backgroundColor: AppBlueColor,
+                  backgroundColor: ButtonColor,
                 ),
                 child: Text(
                   titleButton,
