@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:news_app/components/AppButton.dart';
 
 class Mainlayout extends StatelessWidget {
-  Mainlayout(
+  const Mainlayout(
       {super.key,
       required this.AppBarTitle,
       required this.MiddleScene,
       required this.onNextClicked});
 
-  String AppBarTitle;
-  Widget MiddleScene;
-  VoidCallback onNextClicked;
+  final String AppBarTitle;
+  final Widget MiddleScene;
+  final VoidCallback onNextClicked;
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +25,7 @@ class Mainlayout extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SizedBox(
-                  height: MediaQuery.of(context).size.height * 3 / 4,
-                  child: MiddleScene),
+              Expanded(child: MiddleScene),
               AppButton(
                 titleButton: 'Next',
                 padding:

@@ -19,36 +19,36 @@ class Homescreen extends ConsumerWidget {
 
     return topicsPrv.when(
         data: (data) => Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CountryChooserWidget(user: user),
-            const SizedBox(height: 10),
-            Text('Latest',
-                style: Theme.of(context)
-                    .textTheme
-                    .titleMedium
-                    ?.copyWith(fontWeight: FontWeight.bold)),
-            SizedBox(
-                height: 40,
-                child: BuildHorizontalList(
-                    data,
-                    user,
-                    data.indexWhere((topic) =>
-                        topic.name?.compareTo(user.topic.name ?? '') ==
-                        0), (topic) {
-                  User newUSer = user.copyWith(topic: topic);
-                  ref.read(userProvider.notifier).updateUser(newUSer);
-                  print(newUSer);
-                })),
-            Expanded(
-                child: articles.when(
-                    data: (data) => BuildVerticalList(data.results),
-                    error: (err, _) =>
-                        CustomError(errorDetails: err.toString()),
-                    loading: () => const Apploader()))
-          ],
-        ),
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CountryChooserWidget(user: user),
+                const SizedBox(height: 10),
+                Text('Latest',
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleMedium
+                        ?.copyWith(fontWeight: FontWeight.bold)),
+                SizedBox(
+                    height: 40,
+                    child: BuildHorizontalList(
+                        data,
+                        user,
+                        data.indexWhere((topic) =>
+                            topic.name?.compareTo(user.topic.name ?? '') == 0),
+                        (topic) {
+                      User newUSer = user.copyWith(topic: topic);
+                      ref.read(userProvider.notifier).updateUser(newUSer);
+                      print(newUSer);
+                    })),
+                Expanded(
+                    child: articles.when(
+                        data: (data) => BuildVerticalList(data.results),
+                        error: (err, _) =>
+                            CustomError(errorDetails: err.toString()),
+                        loading: () => const Apploader()))
+              ],
+            ),
         error: (error, _) => CustomError(errorDetails: error.toString()),
         loading: () => const Apploader());
   }

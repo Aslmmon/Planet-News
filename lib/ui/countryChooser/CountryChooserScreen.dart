@@ -14,7 +14,7 @@ class Countrychooserscreen extends ConsumerWidget {
   static String CountryChooserScreenTag = '/CountryChooser';
   final VoidCallback nextScreen;
 
-  const Countrychooserscreen(this.nextScreen);
+  const Countrychooserscreen(this.nextScreen, {super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

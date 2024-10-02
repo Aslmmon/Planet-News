@@ -22,7 +22,6 @@ class _MainhomeState extends ConsumerState<Mainhome> {
   int _currentIndex = 0;
   final List<Widget> _screens = [
     const Homescreen(),
-    const Explorescreen(),
     const Bookmarkscreen(),
     const SettingsScreen(),
   ];
@@ -41,10 +40,6 @@ class _MainhomeState extends ConsumerState<Mainhome> {
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.explore),
-            label: 'Explore',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.bookmark),
@@ -81,4 +76,3 @@ class _MainhomeState extends ConsumerState<Mainhome> {
     );
   }
 }
-
