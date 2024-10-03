@@ -1,23 +1,29 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lottie/lottie.dart';
+import 'package:news_app/providers.dart';
+import 'package:news_app/utils/constants.dart';
 
-class Splashscreen extends StatefulWidget {
+class Splashscreen extends ConsumerStatefulWidget {
   static const SplashScreenTag = '/';
 
-  final Function onSplashFinished;
+  final ValueChanged<bool?> onSplashFinished;
 
   const Splashscreen({super.key, required this.onSplashFinished});
 
   @override
-  State<Splashscreen> createState() => _SplashscreenState();
+  ConsumerState<Splashscreen> createState() => _SplashscreenState();
 }
 
-class _SplashscreenState extends State<Splashscreen> {
+class _SplashscreenState extends ConsumerState<Splashscreen> {
   @override
   void initState() {
-    widget.onSplashFinished();
+    Timer(const Duration(seconds: 3), () async {
+      final isOnBoardingDone =  ref.read(sharedPrefProvider).getBool(OnBoardingDone);
+      widget.onSplashFinished(isOnBoardingDone);
+    });
     super.initState();
   }
 

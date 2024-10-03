@@ -6,7 +6,6 @@ import 'package:news_app/data/models/articles/Articles.dart';
 import 'package:news_app/ui/countryChooser/CountryChooserScreen.dart';
 import 'package:news_app/ui/mainHome/MainHome.dart';
 import 'package:news_app/ui/mainHome/home/details/ArticleDetailsScreen.dart';
-import 'package:news_app/ui/newsSource/NewsSourcesScreen.dart';
 import 'package:news_app/ui/splash/SplashScreen.dart';
 import 'package:news_app/ui/topics/TopicsScreen.dart';
 
@@ -19,18 +18,19 @@ class AppNavigation {
         path: Splashscreen.SplashScreenTag,
         builder: (BuildContext context, GoRouterState state) {
           return Splashscreen(
-            onSplashFinished: () {
-              Timer(const Duration(seconds: 3), () {
-                context.go(Countrychooserscreen.CountryChooserScreenTag);
-              });
+            onSplashFinished: (isOnBoardingDone) {
+              if (isOnBoardingDone==true)
+                context.go(Mainhome.MainHomeTag);
+              else
+                context.go(CountryChooserScreen.CountryChooserScreenTag);
             },
           );
         },
       ),
       GoRoute(
-          path: Countrychooserscreen.CountryChooserScreenTag,
+          path: CountryChooserScreen.CountryChooserScreenTag,
           builder: (BuildContext context, GoRouterState state) {
-            return Countrychooserscreen(() {
+            return CountryChooserScreen(() {
               context.push(Topicsscreen.TopicsScreenTag);
             });
           }),
@@ -40,18 +40,6 @@ class AppNavigation {
             return Topicsscreen(
               onNextClicked: () {
                 context.push(Mainhome.MainHomeTag);
-              },
-            );
-          }),
-      /**
-       * Removed from now in App Navigation
-       */
-      GoRoute(
-          path: Newssourcesscreen.SourcesScreenTag,
-          builder: (BuildContext context, GoRouterState state) {
-            return Newssourcesscreen(
-              onNextClick: () {
-                context.go(Mainhome.MainHomeTag);
               },
             );
           }),
@@ -74,9 +62,21 @@ class AppNavigation {
           builder: (BuildContext context, GoRouterState state) {
             ArticleItem articleItem =
                 state.extra as ArticleItem; // -> casting is important
-
             return ArticleDetailsScreen(articleItem: articleItem);
           }),
     ],
   );
 }
+
+// /**
+//  * Removed from now in App Navigation
+//  */
+// GoRoute(
+// path: Newssourcesscreen.SourcesScreenTag,
+// builder: (BuildContext context, GoRouterState state) {
+// return Newssourcesscreen(
+// onNextClick: () {
+// context.go(Mainhome.MainHomeTag);
+// },
+// );
+// }),

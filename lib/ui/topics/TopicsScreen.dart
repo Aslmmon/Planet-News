@@ -7,7 +7,9 @@ import 'package:news_app/components/TopicsItem.dart';
 import 'package:news_app/data/models/topics/Topics.dart';
 import 'package:news_app/data/models/user/user.dart';
 import 'package:news_app/network/chopper/ApiService.dart';
+import 'package:news_app/providers.dart';
 import 'package:news_app/ui/Providers.dart';
+import 'package:news_app/utils/constants.dart';
 
 class Topicsscreen extends ConsumerWidget {
   static const TopicsScreenTag = '/topics';
@@ -22,8 +24,9 @@ class Topicsscreen extends ConsumerWidget {
 
     return topicsPrv.when(
         data: (data) => Mainlayout(
-              onNextClicked: () {
+              onNextClicked: () async {
                 _updateTopic(user, data, ref);
+                await _saveDoneOnBoarding(ref);
                 onNextClicked();
               },
               AppBarTitle: 'Choose your Topic',
@@ -44,8 +47,12 @@ class Topicsscreen extends ConsumerWidget {
   }
 
   void _updateTopic(User user, List<Topics> data, WidgetRef ref) {
-    User updatedUser = user.copyWith(
-        topic: data[ref.read(IndexProvider.notifier).state]);
+    User updatedUser =
+        user.copyWith(topic: data[ref.read(IndexProvider.notifier).state]);
     ref.read(userProvider.notifier).updateUser(updatedUser);
+  }
+
+  Future<bool> _saveDoneOnBoarding(WidgetRef ref) async {
+    return ref.read(sharedPrefProvider).setBool(OnBoardingDone, true);
   }
 }

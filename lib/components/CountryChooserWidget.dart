@@ -17,7 +17,7 @@ class CountryChooserWidget extends StatelessWidget {
         showModalBottomSheet(
             context: context,
             isScrollControlled: true,
-            builder: (BuildContext context) => Countrychooserscreen(() {
+            builder: (BuildContext context) => CountryChooserScreen(() {
                   Navigator.pop(context);
                 }));
       },

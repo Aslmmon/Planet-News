@@ -10,7 +10,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'providers.dart';
 
 Future<void> main() async {
-
   WidgetsFlutterBinding.ensureInitialized();
   final sharedPrefs = await SharedPreferences.getInstance();
   final service = ApiService.create();
