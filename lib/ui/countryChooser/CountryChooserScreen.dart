@@ -47,9 +47,7 @@ class _CountryChooserScreen extends ConsumerState<CountryChooserScreen> {
                 SearchBox(
                     controller: _searchController,
                     onChanged: (searchText) {
-                      ref
-                          .read(searchControllerProvider.notifier)
-                          .onSearchUser(searchText, data);
+                      ref.read(searchControllerProvider.notifier).onSearchUser(searchText, data);
                     }),
                 Expanded(
                   child: ListView.builder(
@@ -85,8 +83,7 @@ class _CountryChooserScreen extends ConsumerState<CountryChooserScreen> {
   }
 
   void _updateCountry(User user, List<Country> data, WidgetRef ref) {
-    final updatedUser =
-        user.copyWith(country: data[ref.read(IndexProvider.notifier).state]);
-    ref.read(userProvider.notifier).updateUser(updatedUser);
+    final updatedUser = user.copyWith(country: data[ref.read(IndexProvider.notifier).state]);
+    ref.read(userProvider.notifier).updateUser(updatedUser,ref);
   }
 }

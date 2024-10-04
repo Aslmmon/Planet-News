@@ -1,9 +1,15 @@
+import 'dart:convert';
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:news_app/data/models/country/Country.dart';
 import 'package:news_app/data/models/topics/Topics.dart';
+import 'package:news_app/providers.dart';
+part 'user.g.dart';
 
+@JsonSerializable()
 class User extends Equatable {
   final Country country;
   final Topics topic;
@@ -22,9 +28,16 @@ class User extends Equatable {
       topic = topic ?? this.topic,
     );
   }
+
+
+  factory User.fromJson(Map<String, dynamic> json) =>
+      _$UserFromJson(json);
+
+  Map<String, dynamic> toJson() => _$UserToJson(this);
 }
 
 class UserNotifier extends StateNotifier<User> {
+
   UserNotifier()
       : super(User(
             Country(
@@ -34,14 +47,22 @@ class UserNotifier extends StateNotifier<User> {
                 unicode: 'U+1F1EA U+1F1EC',
                 image:
                     'https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/EG.svg'),
-            Topics(name: 'sports',id: '1')));
+            Topics(name: 'sports', id: '1')));
 
-  void updateUser(User updatedUser) {
+  void updateUser(User updatedUser,WidgetRef? ref) {
     state = updatedUser;
+    ref?.read(sharedPrefProvider).setString('user',jsonEncode(state)) ;
     debugPrint('----- user now is $state----- ');
-
+  }
+  User getUser(WidgetRef ref) {
+    // state = updatedUser;
+    // ref?.read(sharedPrefProvider).setString('user',jsonEncode(state)) ;
+    // debugPrint('----- user now is $state----- ');
+    return state;
   }
 }
 
 final userProvider =
-    StateNotifierProvider<UserNotifier, User>((ref) => UserNotifier());
+    StateNotifierProvider<UserNotifier, User>((ref) {
+     return UserNotifier();
+    } );

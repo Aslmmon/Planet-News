@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -49,7 +51,10 @@ class Topicsscreen extends ConsumerWidget {
   void _updateTopic(User user, List<Topics> data, WidgetRef ref) {
     User updatedUser =
         user.copyWith(topic: data[ref.read(IndexProvider.notifier).state]);
-    ref.read(userProvider.notifier).updateUser(updatedUser);
+    // final userString = jsonEncode(updatedUser);
+    ref.read(userProvider.notifier).updateUser(updatedUser,ref);
+    // ref.read(sharedPrefProvider).setString('user', userString) ;
+
   }
 
   Future<bool> _saveDoneOnBoarding(WidgetRef ref) async {

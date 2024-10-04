@@ -19,10 +19,12 @@ class AppNavigation {
         builder: (BuildContext context, GoRouterState state) {
           return Splashscreen(
             onSplashFinished: (isOnBoardingDone) {
-              if (isOnBoardingDone==true)
-                context.go(Mainhome.MainHomeTag);
-              else
+              if (isOnBoardingDone == true) {
+                //  context.go(Mainhome.MainHomeTag);
                 context.go(CountryChooserScreen.CountryChooserScreenTag);
+              } else {
+                context.go(CountryChooserScreen.CountryChooserScreenTag);
+              }
             },
           );
         },

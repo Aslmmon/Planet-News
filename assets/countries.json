@@ -1,12 +1,5 @@
 [
   {
-    "name": "Ascension Island",
-    "code": "AC",
-    "emoji": "🇦🇨",
-    "unicode": "U+1F1E6 U+1F1E8",
-    "image": "https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/AC.svg"
-  },
-  {
     "name": "Andorra",
     "code": "AD",
     "emoji": "🇦🇩",
@@ -26,20 +19,6 @@
     "emoji": "🇦🇫",
     "unicode": "U+1F1E6 U+1F1EB",
     "image": "https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/AF.svg"
-  },
-  {
-    "name": "Antigua & Barbuda",
-    "code": "AG",
-    "emoji": "🇦🇬",
-    "unicode": "U+1F1E6 U+1F1EC",
-    "image": "https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/AG.svg"
-  },
-  {
-    "name": "Anguilla",
-    "code": "AI",
-    "emoji": "🇦🇮",
-    "unicode": "U+1F1E6 U+1F1EE",
-    "image": "https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/AI.svg"
   },
   {
     "name": "Albania",
@@ -63,25 +42,11 @@
     "image": "https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/AO.svg"
   },
   {
-    "name": "Antarctica",
-    "code": "AQ",
-    "emoji": "🇦🇶",
-    "unicode": "U+1F1E6 U+1F1F6",
-    "image": "https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/AQ.svg"
-  },
-  {
     "name": "Argentina",
     "code": "AR",
     "emoji": "🇦🇷",
     "unicode": "U+1F1E6 U+1F1F7",
     "image": "https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/AR.svg"
-  },
-  {
-    "name": "American Samoa",
-    "code": "AS",
-    "emoji": "🇦🇸",
-    "unicode": "U+1F1E6 U+1F1F8",
-    "image": "https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/AS.svg"
   },
   {
     "name": "Austria",
@@ -96,20 +61,6 @@
     "emoji": "🇦🇺",
     "unicode": "U+1F1E6 U+1F1FA",
     "image": "https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/AU.svg"
-  },
-  {
-    "name": "Aruba",
-    "code": "AW",
-    "emoji": "🇦🇼",
-    "unicode": "U+1F1E6 U+1F1FC",
-    "image": "https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/AW.svg"
-  },
-  {
-    "name": "Åland Islands",
-    "code": "AX",
-    "emoji": "🇦🇽",
-    "unicode": "U+1F1E6 U+1F1FD",
-    "image": "https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/AX.svg"
   },
   {
     "name": "Azerbaijan",
