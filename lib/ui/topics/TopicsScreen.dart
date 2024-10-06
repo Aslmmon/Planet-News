@@ -51,6 +51,7 @@ class Topicsscreen extends ConsumerWidget {
     User updatedUser =
         user.copyWith(topic: data[ref.read(IndexProvider.notifier).state]);
     ref.read(userProvider.notifier).updateUser(updatedUser, ref);
+    ref.invalidate(IndexProvider);
   }
 
   Future<bool> _saveDoneOnBoarding(WidgetRef ref) async {

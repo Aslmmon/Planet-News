@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:news_app/components/Apploader.dart';
 import 'package:news_app/components/ArticlesList.dart';
@@ -11,7 +10,6 @@ import 'package:news_app/data/models/topics/Topics.dart';
 import 'package:news_app/data/models/user/user.dart';
 import 'package:news_app/ui/Providers.dart';
 import 'package:news_app/ui/mainHome/home/components/BuildHorizontalList.dart';
-import 'package:news_app/utils/AdHelper.dart';
 
 class Homescreen extends ConsumerStatefulWidget {
   const Homescreen(this.onArticleClicked, {super.key});
@@ -37,15 +35,21 @@ class _HomescreenState extends ConsumerState<Homescreen> {
   @override
   Widget build(BuildContext context) {
     final topicsPrv = ref.watch(topicsProvider);
-    final user = ref.read(userProvider);
-    // final userFromShared = json.decode(ref.watch(sharedPrefProvider).getString('user') ?? '') as User;
+    final user = ref.watch(userProvider);
+    debugPrint("user is updated is  ${user.country.name}");
 
     return topicsPrv.when(
         data: (data) => Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CountryChooserWidget(user: user),
+                CountryChooserWidget(
+                  user: user,
+                  onDisMiss: (){
+                    print('refresh is called should ');
+                    _pagingController.refresh();
+                  },
+                ),
                 const SizedBox(height: 10),
                 Text('Latest',
                     style: Theme.of(context)
@@ -78,21 +82,12 @@ class _HomescreenState extends ConsumerState<Homescreen> {
     _pagingController.refresh();
   }
 
-
-
   Future<void> _fetchPage(int pageKey) async {
     final user = ref.watch(userProvider);
     try {
       final newData = await ref
           .read(apiDataProviderForArticles((user: user, pageKey: pageKey)));
-      print('result of list ${newData.results.length.toString()}');
-      print(
-          'total pages list  ${_pagingController.itemList?.length.toString()}');
-
       final isLastPage = newData.results.length < 10;
-      //final isLastPage = _pagingController.itemList!.length >= newData.totalResults;
-      print('is Last Page ${isLastPage.toString()}');
-
       if (isLastPage) {
         _pagingController.appendLastPage(newData.results);
       } else {
@@ -101,8 +96,6 @@ class _HomescreenState extends ConsumerState<Homescreen> {
             newData.results, int.parse(nextPageKey ?? '0'));
       }
     } catch (error) {
-      print('error is  ${error.toString()}');
-
       _pagingController.error = error;
     }
   }
@@ -113,5 +106,3 @@ class _HomescreenState extends ConsumerState<Homescreen> {
     super.dispose();
   }
 }
-
-

@@ -33,7 +33,7 @@ class _CountryChooserScreen extends ConsumerState<CountryChooserScreen> {
   Widget build(BuildContext context) {
     final countriesData = ref.watch(countriesProvider);
     final FilterdList = ref.watch(searchControllerProvider);
-    final user = ref.read(userProvider);
+    final user = ref.watch(userProvider);
 
     return countriesData.when(
         data: (originalList) => Mainlayout(
@@ -68,8 +68,7 @@ class _CountryChooserScreen extends ConsumerState<CountryChooserScreen> {
               ],
             ),
             onNextClicked: () {
-              _updateCountry(
-                  user, FilterdList.isEmpty ? originalList : FilterdList, ref);
+              _updateCountry(user, FilterdList.isEmpty ? originalList : FilterdList, ref);
               _invalidateSearchText();
               _invalidateChoice();
               widget.nextScreen();
@@ -87,8 +86,7 @@ class _CountryChooserScreen extends ConsumerState<CountryChooserScreen> {
   }
 
   void _updateCountry(User user, List<dynamic> data, WidgetRef ref) {
-    final updatedUser =
-        user.copyWith(country: data[ref.read(IndexProvider.notifier).state]);
+    final updatedUser = user.copyWith(country: data[ref.read(IndexProvider.notifier).state]);
     ref.read(userProvider.notifier).updateUser(updatedUser, ref);
   }
 }

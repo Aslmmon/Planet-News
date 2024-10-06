@@ -6,9 +6,11 @@ class CountryChooserWidget extends StatelessWidget {
   const CountryChooserWidget({
     super.key,
     required this.user,
+    required this.onDisMiss,
   });
 
   final User user;
+  final VoidCallback onDisMiss;
 
   @override
   Widget build(BuildContext context) {
@@ -17,9 +19,13 @@ class CountryChooserWidget extends StatelessWidget {
         showModalBottomSheet(
             context: context,
             isScrollControlled: true,
-            builder: (BuildContext context) => CountryChooserScreen(() {
-                  Navigator.pop(context);
-                }));
+            builder: (BuildContext context) => Padding(
+                  padding: const EdgeInsets.only(top: 25),
+                  child: CountryChooserScreen(() {
+                    Navigator.pop(context);
+                    onDisMiss();
+                  }),
+                ));
       },
       child: Container(
         padding: const EdgeInsets.all(10),

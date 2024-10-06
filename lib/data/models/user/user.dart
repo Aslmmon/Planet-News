@@ -7,6 +7,7 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:news_app/data/models/country/Country.dart';
 import 'package:news_app/data/models/topics/Topics.dart';
 import 'package:news_app/providers.dart';
+
 part 'user.g.dart';
 
 @JsonSerializable()
@@ -29,15 +30,12 @@ class User extends Equatable {
     );
   }
 
-
-  factory User.fromJson(Map<String, dynamic> json) =>
-      _$UserFromJson(json);
+  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
   Map<String, dynamic> toJson() => _$UserToJson(this);
 }
 
 class UserNotifier extends StateNotifier<User> {
-
   UserNotifier()
       : super(User(
             Country(
@@ -49,20 +47,18 @@ class UserNotifier extends StateNotifier<User> {
                     'https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/EG.svg'),
             Topics(name: 'sports', id: '1')));
 
-  void updateUser(User updatedUser,WidgetRef? ref) {
+  void updateUser(User updatedUser, WidgetRef? ref) {
     state = updatedUser;
-    ref?.read(sharedPrefProvider).setString('user',jsonEncode(state)) ;
-    debugPrint('----- user now is $state----- ');
+    ref?.read(sharedPrefProvider).setString('user', jsonEncode(state));
+    debugPrint('----- user country now is ${state.country.name}----- ');
+    debugPrint('----- user topic now is ${state.topic.name}----- ');
   }
-  User getUser(WidgetRef ref) {
-    // state = updatedUser;
-    // ref?.read(sharedPrefProvider).setString('user',jsonEncode(state)) ;
-    // debugPrint('----- user now is $state----- ');
+
+  User getUser() {
     return state;
   }
 }
 
-final userProvider =
-    StateNotifierProvider<UserNotifier, User>((ref) {
-     return UserNotifier();
-    } );
+final userProvider = StateNotifierProvider<UserNotifier, User>((ref) {
+  return UserNotifier();
+});
