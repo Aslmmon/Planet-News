@@ -22,8 +22,7 @@ class _SplashscreenState extends ConsumerState<Splashscreen> {
   @override
   void initState() {
     Timer(const Duration(seconds: 3), () async {
-      final isOnBoardingDone =
-          ref.read(sharedPrefProvider).getBool(OnBoardingDone);
+      final isOnBoardingDone = ref.read(sharedPrefProvider).getBool(OnBoardingDone);
       widget.onSplashFinished(isOnBoardingDone);
     });
     super.initState();
@@ -36,7 +35,7 @@ class _SplashscreenState extends ConsumerState<Splashscreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Lottie.asset('assets/splash_logo.json', width: 200, height: 150),
+            Lottie.asset(splashLogo, width: 200, height: 150),
             Text('Your Daily Dose of News',
                 style: Theme.of(context)
                     .textTheme

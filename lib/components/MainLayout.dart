@@ -15,12 +15,14 @@ class Mainlayout extends ConsumerWidget {
   final VoidCallback onNextClicked;
 
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
+            backgroundColor: Colors.white,
             title: Text(
               AppBarTitle,
-              style: Theme.of(context).textTheme.titleLarge,
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold,fontSize: 16),
             ),
             centerTitle: true),
         body: Column(

@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:news_app/network/chopper/ApiService.dart';
-import 'package:news_app/ui/Providers.dart';
 
 class AppButton extends StatelessWidget {
   AppButton(
@@ -17,14 +14,17 @@ class AppButton extends StatelessWidget {
   final VoidCallback onPressed;
   Color? ButtonColor;
 
- final bool isButtonDisabled;
+  final bool isButtonDisabled;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         const Divider(
-          thickness: 0.3,
+          color: Colors.black,
+          thickness: 0.1,
+          indent: 0,
+          height: 0,
         ),
         Container(
             padding: padding,

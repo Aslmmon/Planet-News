@@ -23,6 +23,7 @@ class Topicsscreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final topicsPrv = ref.watch(topicsProvider);
     final user = ref.watch(userProvider);
+    debugPrint('printing user is ${user.country.name.toString()}');
 
     return topicsPrv.when(
         data: (data) => Mainlayout(
@@ -52,9 +53,8 @@ class Topicsscreen extends ConsumerWidget {
     User updatedUser =
         user.copyWith(topic: data[ref.read(IndexProvider.notifier).state]);
     // final userString = jsonEncode(updatedUser);
-    ref.read(userProvider.notifier).updateUser(updatedUser,ref);
+    ref.read(userProvider.notifier).updateUser(updatedUser, ref);
     // ref.read(sharedPrefProvider).setString('user', userString) ;
-
   }
 
   Future<bool> _saveDoneOnBoarding(WidgetRef ref) async {

@@ -4,10 +4,7 @@ import 'package:news_app/components/Apploader.dart';
 import 'package:news_app/components/CountryFlag.dart';
 import 'package:news_app/components/MainLayout.dart';
 import 'package:news_app/components/SearchBox.dart';
-import 'package:news_app/data/models/country/Country.dart';
 import 'package:news_app/data/models/user/user.dart';
-import 'package:news_app/network/chopper/ApiService.dart';
-import 'package:news_app/providers.dart';
 import 'package:news_app/ui/countryChooser/SearchController.dart';
 
 import '../Providers.dart';
@@ -36,30 +33,32 @@ class _CountryChooserScreen extends ConsumerState<CountryChooserScreen> {
   Widget build(BuildContext context) {
     final countriesData = ref.watch(countriesProvider);
     final FilterdList = ref.watch(searchControllerProvider);
-
-    final user = ref.watch(userProvider);
+    final user = ref.read(userProvider);
 
     return countriesData.when(
-        data: (data) => Mainlayout(
+        data: (originalList) => Mainlayout(
             AppBarTitle: 'Select your Country',
             MiddleScene: Column(
               children: [
                 SearchBox(
                     controller: _searchController,
                     onChanged: (searchText) {
-                      ref.read(searchControllerProvider.notifier).onSearchUser(searchText, data);
+                      _invalidateChoice();
+                      ref
+                          .read(searchControllerProvider.notifier)
+                          .onSearchUser(searchText, originalList);
                     }),
                 Expanded(
                   child: ListView.builder(
                       scrollDirection: Axis.vertical,
                       shrinkWrap: true,
                       itemCount: FilterdList.isEmpty
-                          ? data.length
+                          ? originalList.length
                           : FilterdList.length,
                       itemBuilder: (context, index) {
                         return CountryItem(
                           country: FilterdList.isEmpty
-                              ? data[index]
+                              ? originalList[index]
                               : FilterdList[index],
                           isSelected: ref.watch(IndexProvider) == index,
                           indexItem: index,
@@ -69,21 +68,27 @@ class _CountryChooserScreen extends ConsumerState<CountryChooserScreen> {
               ],
             ),
             onNextClicked: () {
-              _updateCountry(user, data, ref);
-              _invalidateChoice(ref);
+              _updateCountry(
+                  user, FilterdList.isEmpty ? originalList : FilterdList, ref);
+              _invalidateSearchText();
+              _invalidateChoice();
               widget.nextScreen();
             }),
         error: (error, _) => Text(error.toString()),
         loading: () => const Apploader());
   }
 
-  void _invalidateChoice(WidgetRef ref) {
-    ref.invalidate(IndexProvider);
+  void _invalidateSearchText() {
     ref.invalidate(searchControllerProvider);
   }
 
-  void _updateCountry(User user, List<Country> data, WidgetRef ref) {
-    final updatedUser = user.copyWith(country: data[ref.read(IndexProvider.notifier).state]);
-    ref.read(userProvider.notifier).updateUser(updatedUser,ref);
+  void _invalidateChoice() {
+    ref.invalidate(IndexProvider);
+  }
+
+  void _updateCountry(User user, List<dynamic> data, WidgetRef ref) {
+    final updatedUser =
+        user.copyWith(country: data[ref.read(IndexProvider.notifier).state]);
+    ref.read(userProvider.notifier).updateUser(updatedUser, ref);
   }
 }

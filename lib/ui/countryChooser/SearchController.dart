@@ -2,7 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:news_app/data/models/country/Country.dart';
 
 final searchControllerProvider =
-    StateNotifierProvider<SearchUserController, List>((ref) {
+    StateNotifierProvider.autoDispose<SearchUserController, List>((ref) {
   return SearchUserController();
 });
 

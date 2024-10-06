@@ -8,11 +8,15 @@ ThemeData lightTheme = ThemeData(
   hintColor: Colors.amber,
   appBarTheme: AppBarTheme(color: Colors.white10.withOpacity(0.98)),
   scaffoldBackgroundColor: Colors.white10.withOpacity(0.98),
+  inputDecorationTheme: const InputDecorationTheme(
+    border: OutlineInputBorder(
+      borderSide: BorderSide.none,
+    ),
+  ),
   textTheme: TextTheme(
-      titleLarge:
-          GoogleFonts.raleway(fontSize: 20.0, fontStyle: FontStyle.italic),
-      titleMedium: GoogleFonts.raleway(fontSize: 16.0),
-      titleSmall: GoogleFonts.raleway(fontSize: 14.0)),
+      titleLarge: GoogleFonts.poppins(fontSize: 20.0),
+      titleMedium: GoogleFonts.poppins(fontSize: 16.0),
+      titleSmall: GoogleFonts.poppins(fontSize: 14.0)),
   // ... other light theme properties
 );
 

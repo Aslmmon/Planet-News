@@ -20,8 +20,8 @@ class AppNavigation {
           return Splashscreen(
             onSplashFinished: (isOnBoardingDone) {
               if (isOnBoardingDone == true) {
-                  context.go(Mainhome.MainHomeTag);
-                //context.go(CountryChooserScreen.CountryChooserScreenTag);
+                //context.go(Mainhome.MainHomeTag);
+                context.go(CountryChooserScreen.CountryChooserScreenTag);
               } else {
                 context.go(CountryChooserScreen.CountryChooserScreenTag);
               }
@@ -69,16 +69,3 @@ class AppNavigation {
     ],
   );
 }
-
-// /**
-//  * Removed from now in App Navigation
-//  */
-// GoRoute(
-// path: Newssourcesscreen.SourcesScreenTag,
-// builder: (BuildContext context, GoRouterState state) {
-// return Newssourcesscreen(
-// onNextClick: () {
-// context.go(Mainhome.MainHomeTag);
-// },
-// );
-// }),
