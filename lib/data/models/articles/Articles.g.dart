@@ -12,7 +12,7 @@ Articles _$ArticlesFromJson(Map<String, dynamic> json) => Articles(
       results: (json['results'] as List<dynamic>)
           .map((e) => ArticleItem.fromJson(e as Map<String, dynamic>))
           .toList(),
-      nextPage: json['nextPage'] as String,
+      nextPage: json['nextPage'] as String?,
     );
 
 Map<String, dynamic> _$ArticlesToJson(Articles instance) => <String, dynamic>{

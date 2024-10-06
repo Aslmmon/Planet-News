@@ -8,7 +8,6 @@ import 'package:news_app/components/MainLayout.dart';
 import 'package:news_app/components/TopicsItem.dart';
 import 'package:news_app/data/models/topics/Topics.dart';
 import 'package:news_app/data/models/user/user.dart';
-import 'package:news_app/network/chopper/ApiService.dart';
 import 'package:news_app/providers.dart';
 import 'package:news_app/ui/Providers.dart';
 import 'package:news_app/utils/constants.dart';
@@ -23,7 +22,6 @@ class Topicsscreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final topicsPrv = ref.watch(topicsProvider);
     final user = ref.watch(userProvider);
-    debugPrint('printing user is ${user.country.name.toString()}');
 
     return topicsPrv.when(
         data: (data) => Mainlayout(
@@ -52,9 +50,7 @@ class Topicsscreen extends ConsumerWidget {
   void _updateTopic(User user, List<Topics> data, WidgetRef ref) {
     User updatedUser =
         user.copyWith(topic: data[ref.read(IndexProvider.notifier).state]);
-    // final userString = jsonEncode(updatedUser);
     ref.read(userProvider.notifier).updateUser(updatedUser, ref);
-    // ref.read(sharedPrefProvider).setString('user', userString) ;
   }
 
   Future<bool> _saveDoneOnBoarding(WidgetRef ref) async {

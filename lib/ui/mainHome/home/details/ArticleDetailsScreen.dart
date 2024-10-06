@@ -6,7 +6,7 @@ import 'package:url_launcher/url_launcher.dart';
 class ArticleDetailsScreen extends StatelessWidget {
   static const ArticleDetailsTag = '/articles';
 
-   ArticleDetailsScreen({required this.articleItem});
+  ArticleDetailsScreen({required this.articleItem});
 
   final ArticleItem articleItem;
   late Uri _url;
@@ -18,7 +18,8 @@ class ArticleDetailsScreen extends StatelessWidget {
       initialChildSize: 1, // half screen on load
       maxChildSize: 1, // full screen on scroll
       minChildSize: 1,
-      builder: (BuildContext context, ScrollController scrollController) => SingleChildScrollView(
+      builder: (BuildContext context, ScrollController scrollController) =>
+          SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.start,
@@ -52,9 +53,9 @@ class ArticleDetailsScreen extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: AppButton(
                 isButtonDisabled: false,
-                titleButton: 'Read Article on Media ',
+                titleButton: 'Read Full Article on Media ',
                 onPressed: () {
-                  _url =Uri.parse(articleItem.link ?? '');
+                  _url = Uri.parse(articleItem.link ?? '');
                   _launchUrl();
                 },
                 ButtonColor: Colors.blue.withOpacity(0.7),
@@ -65,11 +66,10 @@ class ArticleDetailsScreen extends StatelessWidget {
       ),
     );
   }
+
   Future<void> _launchUrl() async {
     if (!await launchUrl(_url)) {
       throw Exception('Could not launch $_url');
     }
   }
 }
-
-

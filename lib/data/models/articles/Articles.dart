@@ -7,7 +7,7 @@ class Articles {
   String status;
   int totalResults;
   List<ArticleItem> results;
-  String nextPage;
+  String? nextPage;
 
   Articles(
       {required this.status,
