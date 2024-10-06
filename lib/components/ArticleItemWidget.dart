@@ -23,7 +23,7 @@ class ArticleItemWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ClipRRect(
-            borderRadius: const BorderRadius.all(Radius.circular(15)),
+            borderRadius: const BorderRadius.all(Radius.circular(5)),
             child: Image.network(data.image_url ?? imageLink,
                 fit: BoxFit.cover,
                 width: 100,
@@ -53,11 +53,13 @@ class ArticleItemWidget extends StatelessWidget {
                 ),
                 const SizedBox(height: 10),
                 Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Image.network(
-                      data.source_icon ?? imageLink,
-                      width: 20,
-                      height: 20,
+                    CircleAvatar(
+                      backgroundColor: Colors.grey,
+                      backgroundImage:
+                          NetworkImage(data.source_icon ?? imageLink),
+                      radius: 10,
                     ),
                     const SizedBox(width: 5),
                     Text(
