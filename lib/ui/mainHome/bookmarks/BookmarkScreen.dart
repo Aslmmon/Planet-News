@@ -1,46 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
+import 'package:news_app/utils/constants.dart';
 
 class Bookmarkscreen extends StatelessWidget {
   const Bookmarkscreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.all(10),
+    return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        centerTitle: true,
+        title: Text(
+          'Bookmarks',
+          style: Theme.of(context)
+              .textTheme
+              .titleLarge
+              ?.copyWith(fontWeight: FontWeight.bold),
+        ),
+      ),
+      body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
-              'Bookmarks',
-              style: Theme.of(context)
-                  .textTheme
-                  .titleLarge
-                  ?.copyWith(fontWeight: FontWeight.bold),
+            SizedBox(
+              height: 200,
+              child: OverflowBox(
+                minHeight: 400,
+                maxHeight: 400,
+                child: Lottie.asset(empty),
+              ),
             ),
-          //  _buildVerticalArticleList()
+            Text('No Bookmarks Found',
+                style: Theme.of(context).textTheme.titleMedium),
           ],
         ),
       ),
     );
   }
-
-  // Widget _buildVerticalArticleList() {
-  //   return Expanded(
-  //     child: ListView.builder(
-  //         scrollDirection: Axis.vertical,
-  //         shrinkWrap: true,
-  //         itemCount: dummyList.length,
-  //         itemBuilder: (context, index) {
-  //           return Padding(
-  //             padding: const EdgeInsets.symmetric(vertical: 10),
-  //             child: Text(
-  //               dummyList[index],
-  //               style: const TextStyle(color: Colors.black),
-  //             ),
-  //           );
-  //         }),
-  //   );
-  // }
 }
