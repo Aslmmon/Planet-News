@@ -47,6 +47,7 @@ dependencies:
   logging: ^1.2.0
   url_launcher: ^6.3.0
   google_mobile_ads: ^5.1.0
+  infinite_scroll_pagination: ^4.0.0
 
 
 

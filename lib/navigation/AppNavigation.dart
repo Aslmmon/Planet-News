@@ -20,8 +20,8 @@ class AppNavigation {
           return Splashscreen(
             onSplashFinished: (isOnBoardingDone) {
               if (isOnBoardingDone == true) {
-                //  context.go(Mainhome.MainHomeTag);
-                context.go(CountryChooserScreen.CountryChooserScreenTag);
+                  context.go(Mainhome.MainHomeTag);
+                //context.go(CountryChooserScreen.CountryChooserScreenTag);
               } else {
                 context.go(CountryChooserScreen.CountryChooserScreenTag);
               }

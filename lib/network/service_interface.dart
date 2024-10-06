@@ -9,5 +9,9 @@ abstract class ServiceInterface {
 
   Future<Response> fetchData(String api, String country, String category);
 
-  Future<Response> fetchLatestArticles(String api, String country, String category);
+  Future<Response> fetchLatestArticles(
+      String api, String country, String category);
+
+  Future<Response> fetchLatestArticlesWithNextPage(
+      String api, String country, String category,String page);
 }

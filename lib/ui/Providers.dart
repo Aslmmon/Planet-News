@@ -11,6 +11,8 @@ import '../providers.dart';
 
 part 'Providers.g.dart';
 
+typedef Parameters = ({User user, int pageKey});
+
 // providers for UI :
 
 @riverpod
@@ -30,8 +32,8 @@ Future<Sources> sources(SourcesRef ref, User user) =>
     ref.read(apiDataProvider(user));
 
 @riverpod
-Future<Articles> articles(ArticlesRef ref, User user) =>
-    ref.read(apiDataProviderForArticles(user));
+Future<Articles> articles(ArticlesRef ref, Parameters parameter) =>
+    ref.read(apiDataProviderForArticles(parameter));
 
 // providers for Network
 
@@ -77,22 +79,32 @@ SourceItem getSItem(SourceItem result) {
       description: result.description);
 }
 
-final apiDataProviderForArticles =
-    Provider.autoDispose.family<Future<Articles>, User>((ref, data) async {
+final apiDataProviderForArticles = Provider.autoDispose
+    .family<Future<Articles>, Parameters>((ref, parameters) async {
   final apiService = ref.read(serviceProvider);
-
-  final response = await apiService.fetchLatestArticles(
-      apiKey, data.country.code?.toLowerCase() ?? '', data.topic.name ?? '');
+  final response;
+  if (parameters.pageKey == 0) {
+    response = await apiService.fetchLatestArticles(
+        apiKey,
+        parameters.user.country.code?.toLowerCase() ?? '',
+        parameters.user.topic.name ?? '');
+  } else {
+    response = await apiService.fetchLatestArticlesWithNextPage(
+        apiKey,
+        parameters.user.country.code?.toLowerCase() ?? '',
+        parameters.user.topic.name ?? '',
+        parameters.pageKey.toString());
+  }
   if (response.isSuccessful) {
     final articlesModel = Articles.fromJson(response.body);
-    print(response.body);
 
     final articlesList = getArticlesItems(articlesModel);
     final articlesResponse = Articles(
         status: articlesModel.status,
         results: articlesList,
-        totalResults: articlesModel.totalResults);
-    debugPrint(articlesList.toString());
+        totalResults: articlesModel.totalResults,
+        nextPage: articlesModel.nextPage);
+    debugPrint( 'm here' +  articlesResponse.toString());
 
     return articlesResponse;
   } else {

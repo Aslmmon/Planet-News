@@ -182,7 +182,7 @@ class _SourcesProviderElement extends AutoDisposeFutureProviderElement<Sources>
   User get user => (origin as SourcesProvider).user;
 }
 
-String _$articlesHash() => r'aabb9dabf64f89855e98e4d555bd9eec1e564c64';
+String _$articlesHash() => r'4b36fcdc575d2fa84237fa10dd3fb7f1ace592e2';
 
 /// See also [articles].
 @ProviderFor(articles)
@@ -195,10 +195,10 @@ class ArticlesFamily extends Family<AsyncValue<Articles>> {
 
   /// See also [articles].
   ArticlesProvider call(
-    User user,
+    ({int pageKey, User user}) parameter,
   ) {
     return ArticlesProvider(
-      user,
+      parameter,
     );
   }
 
@@ -207,7 +207,7 @@ class ArticlesFamily extends Family<AsyncValue<Articles>> {
     covariant ArticlesProvider provider,
   ) {
     return call(
-      provider.user,
+      provider.parameter,
     );
   }
 
@@ -230,11 +230,11 @@ class ArticlesFamily extends Family<AsyncValue<Articles>> {
 class ArticlesProvider extends AutoDisposeFutureProvider<Articles> {
   /// See also [articles].
   ArticlesProvider(
-    User user,
+    ({int pageKey, User user}) parameter,
   ) : this._internal(
           (ref) => articles(
             ref as ArticlesRef,
-            user,
+            parameter,
           ),
           from: articlesProvider,
           name: r'articlesProvider',
@@ -244,7 +244,7 @@ class ArticlesProvider extends AutoDisposeFutureProvider<Articles> {
                   : _$articlesHash,
           dependencies: ArticlesFamily._dependencies,
           allTransitiveDependencies: ArticlesFamily._allTransitiveDependencies,
-          user: user,
+          parameter: parameter,
         );
 
   ArticlesProvider._internal(
@@ -254,10 +254,10 @@ class ArticlesProvider extends AutoDisposeFutureProvider<Articles> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.user,
+    required this.parameter,
   }) : super.internal();
 
-  final User user;
+  final ({int pageKey, User user}) parameter;
 
   @override
   Override overrideWith(
@@ -272,7 +272,7 @@ class ArticlesProvider extends AutoDisposeFutureProvider<Articles> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        user: user,
+        parameter: parameter,
       ),
     );
   }
@@ -284,21 +284,21 @@ class ArticlesProvider extends AutoDisposeFutureProvider<Articles> {
 
   @override
   bool operator ==(Object other) {
-    return other is ArticlesProvider && other.user == user;
+    return other is ArticlesProvider && other.parameter == parameter;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, user.hashCode);
+    hash = _SystemHash.combine(hash, parameter.hashCode);
 
     return _SystemHash.finish(hash);
   }
 }
 
 mixin ArticlesRef on AutoDisposeFutureProviderRef<Articles> {
-  /// The parameter `user` of this provider.
-  User get user;
+  /// The parameter `parameter` of this provider.
+  ({int pageKey, User user}) get parameter;
 }
 
 class _ArticlesProviderElement
@@ -306,7 +306,8 @@ class _ArticlesProviderElement
   _ArticlesProviderElement(super.provider);
 
   @override
-  User get user => (origin as ArticlesProvider).user;
+  ({int pageKey, User user}) get parameter =>
+      (origin as ArticlesProvider).parameter;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

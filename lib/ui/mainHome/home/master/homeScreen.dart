@@ -3,12 +3,12 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:news_app/components/Apploader.dart';
 import 'package:news_app/components/CountryChooserWidget.dart';
 import 'package:news_app/components/CustomError.dart';
 import 'package:news_app/data/models/articles/Articles.dart';
 import 'package:news_app/data/models/user/user.dart';
-import 'package:news_app/providers.dart';
 import 'package:news_app/ui/Providers.dart';
 import 'package:news_app/ui/mainHome/home/components/BuildHorizontalList.dart';
 import 'package:news_app/utils/AdHelper.dart';
@@ -23,6 +23,10 @@ class Homescreen extends ConsumerStatefulWidget {
 }
 
 class _HomescreenState extends ConsumerState<Homescreen> {
+  static const _pageSize = 10;
+  final PagingController<int, ArticleItem> _pagingController =
+      PagingController(firstPageKey: 0);
+
   BannerAd? _bannerAd;
 
   @override
@@ -52,8 +56,7 @@ class _HomescreenState extends ConsumerState<Homescreen> {
     final topicsPrv = ref.watch(topicsProvider);
     final user = ref.watch(userProvider);
     // final userFromShared = json.decode(ref.watch(sharedPrefProvider).getString('user') ?? '') as User;
-    final articles = ref.watch(
-        articlesProvider(user));
+    final articles = ref.watch(articlesProvider((user: user, pageKey: 0)));
 
     return topicsPrv.when(
         data: (data) => Column(
@@ -61,7 +64,6 @@ class _HomescreenState extends ConsumerState<Homescreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CountryChooserWidget(user: user),
-
                 if (_bannerAd != null)
                   Column(
                     children: [
@@ -83,28 +85,22 @@ class _HomescreenState extends ConsumerState<Homescreen> {
                         .titleMedium
                         ?.copyWith(fontWeight: FontWeight.bold)),
                 SizedBox(
-                    height: 40,
-                    child: BuildHorizontalList(
-                        data,
-                        user,
-                        data.indexWhere((topic) =>
-                            topic.name?.compareTo(user.topic.name ?? '') == 0),
-                        (topic) {
-                      User newUSer = user.copyWith(topic: topic);
-                      ref.read(userProvider.notifier).updateUser(newUSer, ref);
-                      print(newUSer);
-                    })),
+                  height: 40,
+                  child: BuildHorizontalList(
+                      data,
+                      user,
+                      data.indexWhere((topic) =>
+                          topic.name?.compareTo(user.topic.name ?? '') == 0),
+                      (topic) {
+                    User newUSer = user.copyWith(topic: topic);
+                    ref.read(userProvider.notifier).updateUser(newUSer, ref);
+                    print(newUSer);
+                  }),
+                ),
                 Expanded(
-                    child: articles.when(
-                        data: (data) => BuildVerticalList(
-                              data.results,
-                              onArticleClicked: (ArticleItem value) {
-                                widget.onArticleClicked(value);
-                              },
-                            ),
-                        error: (err, _) =>
-                            CustomError(errorDetails: err.toString()),
-                        loading: () => const Apploader()))
+                    child: BuildVerticalList(
+                        onArticleClicked: (article) =>
+                            widget.onArticleClicked(article))),
               ],
             ),
         error: (error, _) => CustomError(errorDetails: error.toString()),

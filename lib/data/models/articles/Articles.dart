@@ -7,11 +7,13 @@ class Articles {
   String status;
   int totalResults;
   List<ArticleItem> results;
+  String nextPage;
 
   Articles(
       {required this.status,
       required this.totalResults,
-      required this.results});
+      required this.results,
+      required this.nextPage});
 
   factory Articles.fromJson(Map<String, dynamic> json) =>
       _$ArticlesFromJson(json);

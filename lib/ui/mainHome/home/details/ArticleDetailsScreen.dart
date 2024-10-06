@@ -18,8 +18,7 @@ class ArticleDetailsScreen extends StatelessWidget {
       initialChildSize: 1, // half screen on load
       maxChildSize: 1, // full screen on scroll
       minChildSize: 1,
-      builder: (BuildContext context, ScrollController scrollController) =>
-          SingleChildScrollView(
+      builder: (BuildContext context, ScrollController scrollController) => SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.start,

@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:news_app/data/models/country/Country.dart';
 import 'package:news_app/data/models/topics/Topics.dart';
 import 'package:news_app/network/service_interface.dart';
+
 part 'ApiService.chopper.dart';
 
 const apiKey = "pub_548991479c93c011bcbb3e55107110a45166d";
@@ -44,6 +45,14 @@ abstract class ApiService extends ChopperService implements ServiceInterface {
   @Get(path: "/api/1/latest")
   Future<Response> fetchLatestArticles(@Query("apiKey") String api,
       @Query("country") String country, @Query('category') String category);
+
+  @override
+  @Get(path: "/api/1/latest")
+  Future<Response> fetchLatestArticlesWithNextPage(
+      @Query("apiKey") String api,
+      @Query("country") String country,
+      @Query('category') String category,
+      @Query('page') String page);
 
   @override
   Future<List<Topics>> getTopics() async {
