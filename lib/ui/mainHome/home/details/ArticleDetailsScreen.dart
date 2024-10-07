@@ -20,10 +20,12 @@ class ArticleDetailsScreen extends StatefulWidget {
 class _ArticleDetailsScreenState extends State<ArticleDetailsScreen> {
   BannerAd? _bannerAd;
   late Uri _url;
+  late bool _isLoading;
 
   @override
   void initState() {
     super.initState();
+    _isLoading = false;
     _initializeAds();
   }
 
@@ -67,6 +69,7 @@ class _ArticleDetailsScreenState extends State<ArticleDetailsScreen> {
               padding: const EdgeInsets.all(8.0),
               child: Text(
                 widget.articleItem.title ?? '',
+                textAlign: TextAlign.center,
                 style: Theme.of(context)
                     .textTheme
                     .titleMedium
@@ -77,10 +80,11 @@ class _ArticleDetailsScreenState extends State<ArticleDetailsScreen> {
               height: 20,
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(5),
               child: Text(
                 widget.articleItem.description ?? '',
                 maxLines: 10,
+                textAlign: TextAlign.start,
                 overflow: TextOverflow.ellipsis,
                 style: Theme.of(context)
                     .textTheme
@@ -89,7 +93,7 @@ class _ArticleDetailsScreenState extends State<ArticleDetailsScreen> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(5),
               child: AppButton(
                 isButtonDisabled: false,
                 titleButton: 'Read Full Article on Media ',
@@ -98,6 +102,18 @@ class _ArticleDetailsScreenState extends State<ArticleDetailsScreen> {
                   _launchUrl();
                 },
                 ButtonColor: Colors.blue.withOpacity(0.7),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(5),
+              child: FavouriteButton(
+                isLoading: _isLoading,
+                isButtonDisabled: false,
+                titleButton: 'Add to favourites ❤️ ',
+                onPressed: () => setState(() {
+                  _isLoading = true;
+                }),
+                ButtonColor: Colors.red.withOpacity(0.5),
               ),
             )
           ],

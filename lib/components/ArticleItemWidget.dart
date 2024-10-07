@@ -1,4 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:news_app/components/Apploader.dart';
 import 'package:news_app/components/SourceItemWidget.dart';
 import 'package:news_app/data/models/articles/Articles.dart';
 
@@ -24,13 +26,15 @@ class ArticleItemWidget extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: const BorderRadius.all(Radius.circular(5)),
-            child: Image.network(data.image_url ?? imageLink,
-                fit: BoxFit.cover,
-                width: 100,
-                height: 100, errorBuilder: (BuildContext context,
-                    Object exception, StackTrace? stackTrace) {
-              return Image.network(imageLink, width: 100, height: 100);
-            }),
+            child: CachedNetworkImage(
+              width: 100,
+              height: 100,
+              placeholder: (context, url) => const Apploader(),
+              imageUrl: data.image_url ?? imageLink,
+              fit: BoxFit.cover,
+              errorWidget: (context, url, error) =>
+                  const Icon(Icons.error_outlined, color: Colors.red),
+            ),
           ),
           const SizedBox(
             width: 10,

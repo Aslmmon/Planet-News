@@ -28,6 +28,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       appBar: AppBar(
         title: const Text('Settings'),
         centerTitle: true,
+        automaticallyImplyLeading: false,
+
       ),
       body: Column(
         children: [
