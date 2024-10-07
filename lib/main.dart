@@ -31,10 +31,10 @@ class NewsApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-      final theme = ref.watch(themeProvider);
+    final theme = ref.watch(themeProvider);
     return MaterialApp.router(
-      theme: theme,
-        themeMode: ThemeMode.light,
+        theme: ref.read(themeProvider.notifier).getTheme(),
+        themeMode: ThemeMode.dark,
         routerConfig: AppNavigation.appRouter,
         builder: (BuildContext context, Widget? widget) {
           ErrorWidget.builder = (FlutterErrorDetails errorDetails) {

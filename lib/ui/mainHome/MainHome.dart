@@ -44,10 +44,10 @@ class _MainhomeState extends ConsumerState<Mainhome> {
     final user = ref.watch(userProvider);
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.shifting,
+        type: BottomNavigationBarType.fixed,
         // Shifting
-        selectedItemColor: AppBlueColor,
-        unselectedItemColor: Colors.grey,
+        selectedItemColor: Theme.of(context).primaryColor,
+        unselectedItemColor: Theme.of(context).primaryColor,
 
         items: const [
           BottomNavigationBarItem(

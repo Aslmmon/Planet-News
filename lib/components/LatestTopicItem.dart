@@ -26,14 +26,24 @@ class LatestTopicItem extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.all(2),
             decoration: BoxDecoration(
-                color: isSelected ? AppBlueColor : Colors.white10,
+                color: isSelected
+                    ? Theme.of(context).primaryColor
+                    : Colors.white10,
                 border: Border.all(
-                  color: isSelected ? AppBlueColor : Colors.white10,
+                  color: isSelected
+                      ? Theme.of(context).primaryColor
+                      : Colors.white10,
                 ),
                 borderRadius: BorderRadius.circular(10)),
-            child: Text(
-              data.name ?? '',
-              style: TextStyle(color: isSelected ? Colors.white : Colors.black),
+            child: Padding(
+              padding: const EdgeInsets.all(2.5),
+              child: Text(
+                data.name ?? '',
+                style: TextStyle(
+                    color: isSelected
+                        ? Theme.of(context).scaffoldBackgroundColor
+                        : Theme.of(context).primaryColor),
+              ),
             ),
           ),
         )

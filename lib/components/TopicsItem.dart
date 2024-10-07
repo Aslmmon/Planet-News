@@ -44,17 +44,19 @@ class BorderdContainer extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.all(5),
       decoration: BoxDecoration(
-        color: isSelectedTopic ? AppBlueColor : Colors.white,
+        color: isSelectedTopic
+            ? AppBlueColor
+            : Theme.of(context).scaffoldBackgroundColor,
         border: Border.all(width: 0.4, color: AppBlueColor),
         borderRadius: const BorderRadius.all(Radius.circular(2.0)),
       ),
       child: Center(
           child: Text(
         topicName,
-        style: Theme.of(context)
-            .textTheme
-            .titleSmall
-            ?.copyWith(color: isSelectedTopic ? Colors.white : AppBlueColor),
+        style: Theme.of(context).textTheme.titleSmall?.copyWith(
+            color: isSelectedTopic
+                ? Colors.white
+                : Theme.of(context).primaryColor),
       )),
     );
   }

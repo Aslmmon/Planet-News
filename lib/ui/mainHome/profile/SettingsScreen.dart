@@ -1,17 +1,26 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:news_app/components/AppButton.dart';
 import 'package:news_app/components/SettingsItem.dart';
+import 'package:news_app/providers.dart';
+import 'package:news_app/ui/theme/theme.dart';
 
-class SettingsScreen extends StatefulWidget {
+class SettingsScreen extends ConsumerStatefulWidget {
   const SettingsScreen({super.key});
 
   @override
-  State<SettingsScreen> createState() => _SettingsScreenState();
+  ConsumerState<SettingsScreen> createState() => _SettingsScreenState();
 }
 
-class _SettingsScreenState extends State<SettingsScreen> {
-  bool _switchValue = true;
+class _SettingsScreenState extends ConsumerState<SettingsScreen> {
+  late bool _switchValue;
+
+  @override
+  void initState() {
+    super.initState();
+    _switchValue = ref.read(sharedPrefProvider).getBool('isDarkTheme') == true;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +40,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
               onChanged: (value) {
                 setState(() {
                   _switchValue = value;
+                  debugPrint(_switchValue.toString());
+                  ref.read(themeProvider.notifier).toggleTheme(_switchValue);
                 });
               },
             ),

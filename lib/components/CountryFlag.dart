@@ -27,9 +27,10 @@ class CountryItem extends ConsumerWidget {
         ref.read(IndexProvider.notifier).state = indexItem;
       },
       child: Container(
-
         padding: const EdgeInsets.all(8.0),
-        color: isSelected ? AppBlueColor.withOpacity(0.8) : Colors.white,
+        color: isSelected
+            ? AppBlueColor.withOpacity(0.8)
+            : Theme.of(context).scaffoldBackgroundColor,
         child: Row(
           children: [
             Text(
@@ -39,7 +40,9 @@ class CountryItem extends ConsumerWidget {
             const SizedBox(width: 10),
             Text(country.name ?? '',
                 style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: isSelected ? Colors.white : Colors.black)),
+                    color: isSelected
+                        ? Colors.white
+                        : Theme.of(context).primaryColor)),
             isSelected
                 ? const Expanded(
                     child: Icon(

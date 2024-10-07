@@ -49,22 +49,22 @@ class _CountryChooserScreen extends ConsumerState<CountryChooserScreen> {
                           .onSearchUser(searchText, originalList);
                     }),
                 Expanded(
-                  child: ListView.builder(
-                      scrollDirection: Axis.vertical,
-                      shrinkWrap: true,
-                      itemCount: FilterdList.isEmpty
-                          ? originalList.length
-                          : FilterdList.length,
-                      itemBuilder: (context, index) {
-                        return CountryItem(
-                          country: FilterdList.isEmpty
-                              ? originalList[index]
-                              : FilterdList[index],
-                          isSelected: ref.watch(IndexProvider) == index,
-                          indexItem: index,
-                        );
-                      }),
-                ),
+                  child:  ListView.builder(
+                        scrollDirection: Axis.vertical,
+                        shrinkWrap: true,
+                        itemCount: FilterdList.isEmpty
+                            ? originalList.length
+                            : FilterdList.length,
+                        itemBuilder: (context, index) {
+                          return CountryItem(
+                            country: FilterdList.isEmpty
+                                ? originalList[index]
+                                : FilterdList[index],
+                            isSelected: ref.watch(IndexProvider) == index,
+                            indexItem: index,
+                          );
+                        }),
+                  ),
               ],
             ),
             onNextClicked: () {
