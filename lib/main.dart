@@ -3,10 +3,12 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:logging/logging.dart';
 import 'package:news_app/components/CustomError.dart';
+import 'package:news_app/data/models/articles/Articles.dart';
+import 'package:news_app/data/network/chopper/ApiService.dart';
 import 'package:news_app/navigation/AppNavigation.dart';
-import 'package:news_app/network/chopper/ApiService.dart';
 import 'package:news_app/ui/theme/theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -15,6 +17,10 @@ import 'providers.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   unawaited(MobileAds.instance.initialize());
+  await Hive.initFlutter();
+   Hive.registerAdapter(ArticleItemAdapter());
+  await Hive.openBox<ArticleItem>('articlesDB');
+
 
   final sharedPrefs = await SharedPreferences.getInstance();
   final service = ApiService.create();
@@ -31,7 +37,7 @@ class NewsApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final theme = ref.watch(themeProvider);
+    ref.watch(themeProvider);
     return MaterialApp.router(
         theme: ref.read(themeProvider.notifier).getTheme(),
         themeMode: ThemeMode.dark,

@@ -1,12 +1,18 @@
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'Articles.g.dart';
 
 @JsonSerializable()
+@HiveType(typeId: 0)
 class Articles {
+  @HiveField(0)
   String status;
+  @HiveField(1)
   int totalResults;
+  @HiveField(2)
   List<ArticleItem> results;
+  @HiveField(3)
   String? nextPage;
 
   Articles(
@@ -22,18 +28,29 @@ class Articles {
 }
 
 @JsonSerializable()
+@HiveType(typeId: 1)
 class ArticleItem {
+  @HiveField(0)
   String? article_id;
+  @HiveField(1)
   String? title;
+  @HiveField(2)
   String? link;
+  @HiveField(3)
   String? description;
-
+  @HiveField(4)
   String? pubDate;
+  @HiveField(5)
   String? pubDateTZ;
+  @HiveField(6)
   String? image_url;
+  @HiveField(7)
   String? source_name;
+  @HiveField(8)
   String? source_url;
+  @HiveField(9)
   String? source_icon;
+  @HiveField(10)
   String? language;
 
   ArticleItem(

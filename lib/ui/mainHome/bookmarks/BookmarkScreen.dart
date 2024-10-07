@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lottie/lottie.dart';
 import 'package:news_app/utils/constants.dart';
 
-class Bookmarkscreen extends StatelessWidget {
+import 'BookmarkStateNotifier.dart';
+
+class Bookmarkscreen extends ConsumerWidget {
   const Bookmarkscreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final bookmarks = ref.watch(bookmarkStateNotifieer);
+    debugPrint('bookmarks list are ' + bookmarks!.length.toString());
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -19,11 +24,16 @@ class Bookmarkscreen extends StatelessWidget {
               ?.copyWith(fontWeight: FontWeight.bold),
         ),
       ),
-      body: const Center(
-        child: EmptyView(
-          title: 'No Bookmarks Found',
-        ),
-      ),
+      body: bookmarks.isEmpty
+          ? const Center(
+              child: EmptyView(
+                title: 'No Bookmarks Found',
+              ),
+            )
+          : ListView.builder(
+              itemBuilder: (context, index) => Text(bookmarks[index].title.toString()),
+              itemCount: bookmarks.length,
+            ),
     );
   }
 }

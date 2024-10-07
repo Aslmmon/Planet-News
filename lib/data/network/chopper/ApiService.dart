@@ -4,7 +4,7 @@ import 'package:chopper/chopper.dart';
 import 'package:flutter/services.dart';
 import 'package:news_app/data/models/country/Country.dart';
 import 'package:news_app/data/models/topics/Topics.dart';
-import 'package:news_app/network/service_interface.dart';
+import 'package:news_app/data/network/service_interface.dart';
 
 part 'ApiService.chopper.dart';
 

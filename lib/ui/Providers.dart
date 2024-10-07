@@ -5,7 +5,7 @@ import 'package:news_app/data/models/country/Country.dart';
 import 'package:news_app/data/models/sources/Sources.dart';
 import 'package:news_app/data/models/topics/Topics.dart';
 import 'package:news_app/data/models/user/user.dart';
-import 'package:news_app/network/chopper/ApiService.dart';
+import 'package:news_app/data/network/chopper/ApiService.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../providers.dart';
 
@@ -104,7 +104,7 @@ final apiDataProviderForArticles = Provider.autoDispose
         results: articlesList,
         totalResults: articlesModel.totalResults,
         nextPage: articlesModel.nextPage);
-    debugPrint( 'm here' +  articlesResponse.toString());
+    debugPrint('m here' + articlesResponse.toString());
 
     return articlesResponse;
   } else {
