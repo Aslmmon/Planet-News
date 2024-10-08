@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -62,8 +63,8 @@ class _ArticleDetailsScreenState extends ConsumerState<ArticleDetailsScreen> {
                   const SizedBox(height: 10),
                 ],
               ),
-            Image.network(
-              widget.articleItem.image_url ?? imageLink,
+            CachedNetworkImage(
+              imageUrl: widget.articleItem.image_url ?? imageLink,
               height: 250,
               fit: BoxFit.cover,
               width: MediaQuery.of(context).size.width,

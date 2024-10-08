@@ -66,12 +66,16 @@ class ArticleItemWidget extends StatelessWidget {
                       radius: 10,
                     ),
                     const SizedBox(width: 5),
-                    Text(
-                      data.source_name ?? '',
-                      style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.grey,
-                          fontSize: 10),
+                    Flexible(
+                      child: Text (
+                        data.source_name ?? '',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey,
+                            fontSize: 10),
+                      ),
                     ),
                     const SizedBox(width: 5),
                   ],
