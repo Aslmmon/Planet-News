@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:news_app/components/AppButton.dart';
 import 'package:news_app/data/models/articles/Articles.dart';
-import 'package:news_app/data/models/user/user.dart';
 import 'package:news_app/ui/mainHome/bookmarks/BookmarkScreen.dart';
 import 'package:news_app/ui/mainHome/home/details/ArticleDetailsScreen.dart';
 import 'package:news_app/ui/mainHome/settings/SettingsScreen.dart';

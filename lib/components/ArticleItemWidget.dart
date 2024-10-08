@@ -74,13 +74,23 @@ class ArticleItemWidget extends StatelessWidget {
                           fontSize: 10),
                     ),
                     const SizedBox(width: 5),
+                  ],
+                ),
+                const SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const Icon(Icons.access_time_outlined, size: 14),
+                    const SizedBox(width: 10),
                     Text(
                       data.pubDate ?? '',
                       style: Theme.of(context).textTheme.titleSmall?.copyWith(
                           fontWeight: FontWeight.bold,
+                          overflow: TextOverflow.ellipsis,
                           color: Colors.grey,
-                          fontSize: 8),
-                    )
+                          fontSize: 10),
+                    ),
                   ],
                 )
               ],
