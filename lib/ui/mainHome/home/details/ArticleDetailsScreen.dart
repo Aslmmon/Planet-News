@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:news_app/components/AppButton.dart';
 import 'package:news_app/components/SourceItemWidget.dart';
 import 'package:news_app/data/models/articles/Articles.dart';
+import 'package:news_app/ui/mainHome/bookmarks/BookmarkStateNotifier.dart';
 import 'package:news_app/utils/AdHelper.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class ArticleDetailsScreen extends StatefulWidget {
+class ArticleDetailsScreen extends ConsumerStatefulWidget {
   static const ArticleDetailsTag = '/articles';
 
   const ArticleDetailsScreen({required this.articleItem});
@@ -14,10 +16,11 @@ class ArticleDetailsScreen extends StatefulWidget {
   final ArticleItem articleItem;
 
   @override
-  State<ArticleDetailsScreen> createState() => _ArticleDetailsScreenState();
+  ConsumerState<ArticleDetailsScreen> createState() =>
+      _ArticleDetailsScreenState();
 }
 
-class _ArticleDetailsScreenState extends State<ArticleDetailsScreen> {
+class _ArticleDetailsScreenState extends ConsumerState<ArticleDetailsScreen> {
   BannerAd? _bannerAd;
   late Uri _url;
   late bool _isLoading;
@@ -110,9 +113,7 @@ class _ArticleDetailsScreenState extends State<ArticleDetailsScreen> {
                 isLoading: _isLoading,
                 isButtonDisabled: false,
                 titleButton: 'Add to favourites ❤️ ',
-                onPressed: () => setState(() {
-                  _isLoading = true;
-                }),
+                onPressed: () => _saveArticleToDB(),
                 ButtonColor: Colors.red.withOpacity(0.5),
               ),
             )
@@ -120,6 +121,20 @@ class _ArticleDetailsScreenState extends State<ArticleDetailsScreen> {
         ),
       ),
     );
+  }
+
+  void _saveArticleToDB() {
+    return setState(() {
+      _isLoading = true;
+      ref
+          .read(bookmarkStateNotifieer.notifier)
+          .addArticleItem(widget.articleItem);
+      Future.delayed(const Duration(seconds: 1), () {
+        setState(() {
+          _isLoading = false;
+        });
+      });
+    });
   }
 
   Future<void> _launchUrl() async {

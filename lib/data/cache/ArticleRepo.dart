@@ -37,6 +37,7 @@ class ArticleRepo {
 
   /// Delete All Article in Database
   void deleteAll() {
+    _hive.clear();
     _box.clear();
   }
 }

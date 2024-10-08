@@ -27,12 +27,11 @@ class LatestTopicItem extends StatelessWidget {
             padding: const EdgeInsets.all(2),
             decoration: BoxDecoration(
                 color: isSelected
-                    ? Theme.of(context).primaryColor
-                    : Colors.white10,
+                    ? Theme.of(context).hintColor
+                    : Theme.of(context).primaryColorLight,
                 border: Border.all(
-                  color: isSelected
-                      ? Theme.of(context).primaryColor
-                      : Colors.white10,
+                  color:
+                      isSelected ? Theme.of(context).hintColor : Colors.white10,
                 ),
                 borderRadius: BorderRadius.circular(10)),
             child: Padding(
@@ -41,8 +40,8 @@ class LatestTopicItem extends StatelessWidget {
                 data.name ?? '',
                 style: TextStyle(
                     color: isSelected
-                        ? Theme.of(context).scaffoldBackgroundColor
-                        : Theme.of(context).primaryColor),
+                        ? Theme.of(context).primaryColorLight
+                        : Theme.of(context).hintColor),
               ),
             ),
           ),

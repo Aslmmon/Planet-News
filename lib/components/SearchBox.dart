@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/components/AppButton.dart';
 
 class SearchBox extends StatelessWidget {
   final TextEditingController controller;
@@ -17,9 +16,9 @@ class SearchBox extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 5),
       margin: const EdgeInsets.all(5),
       decoration: BoxDecoration(
-        color: Theme.of(context).scaffoldBackgroundColor,
+        color: Theme.of(context).primaryColorLight,
         border: Border.all(
-          color: Theme.of(context).primaryColor,
+          color: Theme.of(context).hintColor,
           width: 0.5,
         ),
         borderRadius: BorderRadius.circular(5),
@@ -27,10 +26,11 @@ class SearchBox extends StatelessWidget {
       child: TextField(
         controller: controller,
         onChanged: onChanged,
-        decoration: const InputDecoration(
+        decoration:  InputDecoration(
           border: InputBorder.none,
           labelText: 'Search',
-          suffixIcon: Icon(Icons.search),
+          labelStyle: TextStyle(fontSize: 14,color: Theme.of(context).hintColor),
+          suffixIcon: const Icon(Icons.search),
         ),
       ),
     );

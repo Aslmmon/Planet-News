@@ -6,11 +6,11 @@ class Apploader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return  Scaffold(
       body: Center(
         child: CircularProgressIndicator(
           strokeWidth: 2.5,
-          color: AppBlueColor,
+          color: Theme.of(context).hintColor,
         ),
       ),
     );

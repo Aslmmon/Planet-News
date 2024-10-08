@@ -55,7 +55,9 @@ class _HomescreenState extends ConsumerState<Homescreen> {
                     style: Theme.of(context)
                         .textTheme
                         .titleMedium
-                        ?.copyWith(fontWeight: FontWeight.bold)),
+                        ?.copyWith(fontWeight: FontWeight.bold,color: Theme.of(context).hintColor)),
+                const SizedBox(height: 10),
+
                 SizedBox(
                   height: 40,
                   child: BuildTopicList(

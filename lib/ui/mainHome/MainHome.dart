@@ -5,8 +5,8 @@ import 'package:news_app/data/models/articles/Articles.dart';
 import 'package:news_app/data/models/user/user.dart';
 import 'package:news_app/ui/mainHome/bookmarks/BookmarkScreen.dart';
 import 'package:news_app/ui/mainHome/home/details/ArticleDetailsScreen.dart';
+import 'package:news_app/ui/mainHome/settings/SettingsScreen.dart';
 import 'home/master/homeScreen.dart';
-import 'profile/SettingsScreen.dart';
 
 class Mainhome extends ConsumerStatefulWidget {
   Mainhome(this.valueChanged, {super.key});
@@ -41,14 +41,12 @@ class _MainhomeState extends ConsumerState<Mainhome> {
 
   @override
   Widget build(BuildContext context) {
-    final user = ref.watch(userProvider);
+    // final user = ref.watch(userProvider);
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        // Shifting
-        selectedItemColor: Theme.of(context).primaryColor,
-        unselectedItemColor: Theme.of(context).primaryColor,
-
+        type: BottomNavigationBarType.shifting,
+        selectedItemColor: Theme.of(context).hintColor,
+        unselectedItemColor: Theme.of(context).hintColor,
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),

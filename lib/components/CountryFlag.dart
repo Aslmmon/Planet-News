@@ -20,7 +20,7 @@ class CountryItem extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return InkWell(
       borderRadius: BorderRadius.circular(2),
-      highlightColor: AppBlueColor,
+      highlightColor: Theme.of(context).primaryColor,
       splashColor: Colors.blue.withOpacity(0.1),
       onTap: () {
         ref.read(IndexProvider.notifier).state = indexItem;
@@ -28,8 +28,8 @@ class CountryItem extends ConsumerWidget {
       child: Container(
         padding: const EdgeInsets.all(8.0),
         color: isSelected
-            ? AppBlueColor.withOpacity(0.8)
-            : Theme.of(context).scaffoldBackgroundColor,
+            ? Theme.of(context).hintColor
+            : Theme.of(context).primaryColorLight,
         child: Row(
           children: [
             Text(
@@ -39,14 +39,12 @@ class CountryItem extends ConsumerWidget {
             const SizedBox(width: 10),
             Text(country.name ?? '',
                 style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: isSelected
-                        ? Colors.white
-                        : Theme.of(context).primaryColor)),
+                    color: isSelected ? Theme.of(context).primaryColorLight : Theme.of(context).hintColor) ),
             isSelected
-                ? const Expanded(
+                ?  Expanded(
                     child: Icon(
                     Icons.check,
-                    color: Colors.white,
+                    color: Theme.of(context).primaryColorLight,
                   ))
                 : const SizedBox()
           ],

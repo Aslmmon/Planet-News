@@ -30,9 +30,9 @@ class CountryChooserWidget extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
-          color: Theme.of(context).primaryColor,
-          border: Border.all(width: 0.4, color: Colors.grey),
-          borderRadius: const BorderRadius.all(Radius.circular(25)),
+          color: Theme.of(context).primaryColorLight,
+          border: Border.all(width: 0.3, color: Colors.grey),
+          borderRadius: const BorderRadius.all(Radius.circular(15)),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
@@ -41,18 +41,18 @@ class CountryChooserWidget extends StatelessWidget {
           children: [
             Text(
               user.country.emoji ?? '',
-              style: const TextStyle(fontSize: 18),
+              style: const TextStyle(fontSize: 14),
             ),
             const SizedBox(width: 5),
             Text(
               user.country.name ?? '',
               style: TextStyle(
-                  fontSize: 16,
-                  color: Theme.of(context).scaffoldBackgroundColor),
+                  fontSize: 12,
+                  color: Theme.of(context).hintColor),
             ),
             Icon(
               Icons.keyboard_arrow_down_sharp,
-              color: Theme.of(context).scaffoldBackgroundColor,
+              color: Theme.of(context).hintColor,
             )
           ],
         ),

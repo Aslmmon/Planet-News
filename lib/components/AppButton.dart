@@ -5,7 +5,7 @@ class AppButton extends StatelessWidget {
       {super.key,
       required this.titleButton,
       this.padding = EdgeInsets.zero,
-      this.ButtonColor = AppBlueColor,
+      this.ButtonColor = Colors.black,
       required this.isButtonDisabled,
       required this.onPressed});
 
@@ -34,14 +34,14 @@ class AppButton extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5)),
-                  backgroundColor: ButtonColor,
+                  backgroundColor: Theme.of(context).hintColor,
                 ),
                 child: Text(
                   titleButton,
                   style: Theme.of(context)
                       .textTheme
                       .titleMedium
-                      ?.copyWith(color: Colors.white),
+                      ?.copyWith(color: Theme.of(context).primaryColorLight),
                 ))),
       ],
     );
@@ -53,7 +53,7 @@ class FavouriteButton extends StatelessWidget {
       {super.key,
       required this.titleButton,
       this.padding = EdgeInsets.zero,
-      this.ButtonColor = AppBlueColor,
+      this.ButtonColor =Colors.black,
       required this.isButtonDisabled,
       required this.onPressed,
       required this.isLoading});

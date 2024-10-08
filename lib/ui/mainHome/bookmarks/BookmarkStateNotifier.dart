@@ -21,7 +21,11 @@ class BookmarkStateNotifier extends StateNotifier<List<ArticleItem>?> {
   ///add todo to local Storage
 
   void addArticleItem(ArticleItem articleItem) {
-    state = repo!.addArticleItem(articleItem);
+    if (state?.contains(articleItem) == true) {
+      return;
+    } else {
+      state = repo?.addArticleItem(articleItem);
+    }
   }
 
   ///remove todo from local Storage
@@ -33,6 +37,11 @@ class BookmarkStateNotifier extends StateNotifier<List<ArticleItem>?> {
 
   void updateArticleItem(int index, ArticleItem articleItem) {
     state = repo?.updateArticleItem(index, articleItem);
+  }
+
+  void clearArticles() {
+    repo?.deleteAll();
+    state = [];
   }
 }
 

@@ -26,18 +26,20 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Settings'),
-        centerTitle: true,
-        automaticallyImplyLeading: false,
-
-      ),
+          title: Text(
+            'Settings',
+            style: TextStyle(color: Theme.of(context).hintColor),
+          ),
+          centerTitle: true,
+          automaticallyImplyLeading: false,
+          backgroundColor: Theme.of(context).primaryColorLight),
       body: Column(
         children: [
           SettingItem(
             startIcon: const Icon(Icons.dark_mode),
             title: 'Dark Mode',
             endWidget: CupertinoSwitch(
-              activeColor: AppBlueColor,
+              activeColor: Theme.of(context).hintColor,
               value: _switchValue,
               onChanged: (value) {
                 setState(() {

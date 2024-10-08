@@ -6,10 +6,11 @@ import 'package:shared_preferences/src/shared_preferences_legacy.dart';
 
 ThemeData lightTheme = ThemeData(
   brightness: Brightness.light,
-  primaryColor: Colors.black,
-  hintColor: Colors.grey,
+  primaryColorLight: Color(0xFFF5F5F5),
+  hintColor: Color(0xFF607D8B),
+  dividerColor: Color(0xFFBDBDBD),
   appBarTheme: const AppBarTheme(color: Colors.white),
-  scaffoldBackgroundColor: Colors.white,
+  scaffoldBackgroundColor: Color(0xFFF5F5F5),
   inputDecorationTheme: const InputDecorationTheme(
     border: OutlineInputBorder(
       borderSide: BorderSide.none,
@@ -25,6 +26,7 @@ ThemeData lightTheme = ThemeData(
 ThemeData darkTheme = ThemeData(
   brightness: Brightness.dark,
   primaryColor: Colors.white,
+  primaryColorLight: Colors.black,
   hintColor: Colors.amber,
   scaffoldBackgroundColor: Colors.black,
   appBarTheme: const AppBarTheme(

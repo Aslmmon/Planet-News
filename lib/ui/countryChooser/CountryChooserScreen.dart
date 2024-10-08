@@ -49,7 +49,7 @@ class _CountryChooserScreen extends ConsumerState<CountryChooserScreen> {
                           .onSearchUser(searchText, originalList);
                     }),
                 Expanded(
-                  child:  ListView.builder(
+                  child:  ListView.separated(
                         scrollDirection: Axis.vertical,
                         shrinkWrap: true,
                         itemCount: FilterdList.isEmpty
@@ -63,7 +63,11 @@ class _CountryChooserScreen extends ConsumerState<CountryChooserScreen> {
                             isSelected: ref.watch(IndexProvider) == index,
                             indexItem: index,
                           );
-                        }),
+                        },separatorBuilder: (_,__)=> Divider(
+                    color: Theme.of(context).hintColor,
+                    height: 0,
+                    thickness: 0.1,
+                  ),),
                   ),
               ],
             ),
