@@ -40,7 +40,8 @@ ThemeData darkTheme = ThemeData(
 );
 
 class ThemeProvider extends StateNotifier<ThemeData> {
-  ThemeProvider(this.pref) : super(lightTheme);
+  ThemeProvider(this.pref)
+      : super(pref?.getBool('isDarkTheme') == true ? darkTheme : lightTheme);
   final SharedPreferences? pref;
 
   void toggleTheme(bool isDarkTheme) {
@@ -54,6 +55,8 @@ class ThemeProvider extends StateNotifier<ThemeData> {
 
   ThemeData getTheme() {
     final themeType = pref?.getBool('isDarkTheme');
+    debugPrint('Theme Type is of Type : $themeType');
+
     if (themeType == true) {
       return darkTheme;
     } else {

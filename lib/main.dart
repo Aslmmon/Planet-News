@@ -18,9 +18,8 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   unawaited(MobileAds.instance.initialize());
   await Hive.initFlutter();
-   Hive.registerAdapter(ArticleItemAdapter());
+  Hive.registerAdapter(ArticleItemAdapter());
   await Hive.openBox<ArticleItem>('articlesDB');
-
 
   final sharedPrefs = await SharedPreferences.getInstance();
   final service = ApiService.create();
@@ -37,9 +36,9 @@ class NewsApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.watch(themeProvider);
+    final theme = ref.watch(themeProvider);
     return MaterialApp.router(
-        theme: ref.read(themeProvider.notifier).getTheme(),
+        theme: theme,
         themeMode: ThemeMode.dark,
         routerConfig: AppNavigation.appRouter,
         builder: (BuildContext context, Widget? widget) {

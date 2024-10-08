@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:news_app/components/AppButton.dart';
 import 'package:news_app/components/SettingsItem.dart';
 import 'package:news_app/providers.dart';
 import 'package:news_app/ui/theme/theme.dart';
@@ -45,8 +44,9 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 setState(() {
                   _switchValue = value;
                   debugPrint(_switchValue.toString());
-                  ref.read(themeProvider.notifier).toggleTheme(_switchValue);
                 });
+                ref.read(themeProvider.notifier).toggleTheme(value);
+
               },
             ),
           ),
