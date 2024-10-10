@@ -56,8 +56,6 @@ dependencies:
 
 
 
-
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -73,6 +71,24 @@ dev_dependencies:
   chopper_generator: ^6.0.3
   riverpod_generator: ^2.4.0
   hive_generator: ^2.0.0
+#  flutter_launcher_icons: "^0.14.1"
+  icons_launcher: ^3.0.0
+icons_launcher:
+  image_path: "assets/logo_planet.png"
+  platforms:
+    android:
+      enable: true
+    ios:
+      enable: true
+
+#flutter_launcher_icons:
+#  android: "launcher_icon"
+#  ios: true
+#  image_path: "assets/new.png"
+
+
+
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

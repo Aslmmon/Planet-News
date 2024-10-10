@@ -10,6 +10,7 @@ import 'package:news_app/data/models/articles/Articles.dart';
 import 'package:news_app/data/network/chopper/ApiService.dart';
 import 'package:news_app/navigation/AppNavigation.dart';
 import 'package:news_app/ui/theme/theme.dart';
+import 'package:news_app/utils/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'providers.dart';
@@ -19,7 +20,7 @@ Future<void> main() async {
   unawaited(MobileAds.instance.initialize());
   await Hive.initFlutter();
   Hive.registerAdapter(ArticleItemAdapter());
-  await Hive.openBox<ArticleItem>('articlesDB');
+  await Hive.openBox<ArticleItem>(articlesDatabase);
 
   final sharedPrefs = await SharedPreferences.getInstance();
   final service = ApiService.create();
@@ -29,6 +30,7 @@ Future<void> main() async {
     sharedPrefProvider.overrideWithValue(sharedPrefs),
     serviceProvider.overrideWithValue(service)
   ], child: const NewsApp()));
+
 }
 
 class NewsApp extends ConsumerWidget {

@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
 import 'package:news_app/data/models/articles/Articles.dart';
+import 'package:news_app/utils/constants.dart';
 
 class ArticleRepo {
   late Box<ArticleItem> _hive;
@@ -10,7 +11,7 @@ class ArticleRepo {
 
   List<ArticleItem> getArticlesItem() {
     /// Fetch the Todos from the "todos" database
-    _hive = Hive.box<ArticleItem>('articlesDB');
+    _hive = Hive.box<ArticleItem>(articlesDatabase);
     _box = _hive.values.toList();
     return _box;
   }
