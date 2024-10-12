@@ -23,6 +23,8 @@ class ArticleDetailsScreen extends ConsumerStatefulWidget {
 
 class _ArticleDetailsScreenState extends ConsumerState<ArticleDetailsScreen> {
   BannerAd? _bannerAd;
+  InterstitialAd? _interstitialAd;
+
   late Uri _url;
   late bool _isLoading;
 
@@ -31,6 +33,7 @@ class _ArticleDetailsScreenState extends ConsumerState<ArticleDetailsScreen> {
     super.initState();
     _isLoading = false;
     _initializeAds();
+    _loadInterstitialAd();
   }
 
   @override
@@ -48,21 +51,24 @@ class _ArticleDetailsScreenState extends ConsumerState<ArticleDetailsScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             //** banner widget :
-            if (_bannerAd != null)
-              Column(
-                children: [
-                  const SizedBox(height: 40),
-                  Align(
-                    alignment: Alignment.topCenter,
-                    child: SizedBox(
-                      width: _bannerAd!.size.width.toDouble(),
-                      height: _bannerAd!.size.height.toDouble(),
-                      child: AdWidget(ad: _bannerAd!),
-                    ),
+            _bannerAd != null
+                ? Column(
+                    children: [
+                      const SizedBox(height: 40),
+                      Align(
+                        alignment: Alignment.topCenter,
+                        child: SizedBox(
+                          width: _bannerAd!.size.width.toDouble(),
+                          height: _bannerAd!.size.height.toDouble(),
+                          child: AdWidget(ad: _bannerAd!),
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                    ],
+                  )
+                : const SizedBox(
+                    height: 50,
                   ),
-                  const SizedBox(height: 10),
-                ],
-              ),
             CachedNetworkImage(
               imageUrl: widget.articleItem.image_url ?? imageLink,
               height: 250,
@@ -114,7 +120,11 @@ class _ArticleDetailsScreenState extends ConsumerState<ArticleDetailsScreen> {
                 isLoading: _isLoading,
                 isButtonDisabled: false,
                 titleButton: 'Add to favourites ❤️ ',
-                onPressed: () => _saveArticleToDB(),
+                onPressed: () {
+                  _interstitialAd != null
+                      ? _interstitialAd?.show()
+                      : _saveArticleToDB();
+                },
                 ButtonColor: Colors.red.withOpacity(0.5),
               ),
             )
@@ -161,5 +171,30 @@ class _ArticleDetailsScreenState extends ConsumerState<ArticleDetailsScreen> {
         },
       ),
     ).load();
+  }
+
+  void _loadInterstitialAd() {
+    InterstitialAd.load(
+      adUnitId: AdHelper.interstitialAdUnitId,
+      request: const AdRequest(),
+      adLoadCallback: InterstitialAdLoadCallback(
+        onAdLoaded: (ad) {
+          ad.fullScreenContentCallback = FullScreenContentCallback(
+            onAdDismissedFullScreenContent: (ad) {
+              //    completeFlow;
+               _saveArticleToDB();
+            },
+          );
+
+          setState(() {
+            _interstitialAd = ad;
+          });
+        },
+        onAdFailedToLoad: (err) {
+          print('Failed to load an interstitial ad: ${err.message}');
+
+        },
+      ),
+    );
   }
 }

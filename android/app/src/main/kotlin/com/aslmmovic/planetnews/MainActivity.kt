@@ -1,4 +1,4 @@
-package com.news.news_app
+package com.aslmmovic.planetnews
 
 import io.flutter.embedding.android.FlutterActivity
 
