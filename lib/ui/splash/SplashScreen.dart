@@ -1,6 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lottie/lottie.dart';
@@ -21,6 +19,7 @@ class Splashscreen extends ConsumerStatefulWidget {
 class _SplashscreenState extends ConsumerState<Splashscreen> {
   @override
   void initState() {
+
     Timer(const Duration(seconds: 3), () async {
       final isOnBoardingDone =
           ref.read(sharedPrefProvider).getBool(OnBoardingDone);
