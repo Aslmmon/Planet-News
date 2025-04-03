@@ -1,4 +1,4 @@
-# news_app
+# Planet News
 
 A new Flutter project.
 
